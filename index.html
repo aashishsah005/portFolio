@@ -420,6 +420,18 @@
     opacity: 0;
   }
 
+  /* --- Typewriter cursor blink --- */
+  .typewriter-cursor {
+    color: var(--copper);
+    animation: typewriterBlink 0.8s infinite;
+    margin-left: 2px;
+    font-weight: 400;
+  }
+  @keyframes typewriterBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
   .delay-100 { animation-delay: 100ms; }
   .delay-200 { animation-delay: 200ms; }
   .delay-300 { animation-delay: 300ms; }
@@ -617,7 +629,7 @@
     <div>
       <div class="hero-tag animate-slide-right delay-100">// COMPUTER ENGINEERING — GANPAT UNIVERSITY, CLASS OF 2027</div>
       <h1 class="animate-fade-in delay-200">Building full-stack<br>systems that <em>hold up</em><br>under real load.</h1>
-      <p class="animate-fade-in delay-400">I'm Aashish Sah — a MERN stack developer focused on production-grade architecture: secure auth flows, real-time features, and payment integrations, not tutorial clones.</p>
+      <p class="animate-fade-in delay-400">I'm Aashish Sah — <span id="typewriter">Full-Stack Developer</span><span class="typewriter-cursor">|</span> <br>focused on production-grade architecture: secure auth flows, real-time features, and payment integrations, not tutorial clones.</p>
       <div class="btn-row animate-fade-in delay-500">
         <button id="heroHireBtn" class="btn btn-primary" style="cursor:pointer;">Hire Me →</button>
         <a href="resume.pdf" class="btn btn-ghost" target="_blank" download="Aashish_Sah_Resume.pdf">Download Resume</a>
@@ -1026,6 +1038,48 @@
   });
 
   
+  
+  // ===== Typewriter effect =====
+  const typewriterWords = ["Full-Stack Developer", "MERN Developer", "AI Enthusiastic"];
+  let wordIndex = 0;
+  let charIndex = typewriterWords[0].length;
+  let isDeleting = true;
+  const typewriterEl = document.getElementById('typewriter');
+  const typingSpeed = 100;
+  const deletingSpeed = 60;
+  const wordPause = 2000;
+
+  function type() {
+    const currentWord = typewriterWords[wordIndex];
+    
+    if (isDeleting) {
+      charIndex--;
+    } else {
+      charIndex++;
+    }
+
+    if (typewriterEl) {
+      typewriterEl.textContent = currentWord.substring(0, charIndex);
+    }
+
+    let delay = isDeleting ? deletingSpeed : typingSpeed;
+
+    if (!isDeleting && charIndex === currentWord.length) {
+      delay = wordPause;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      wordIndex = (wordIndex + 1) % typewriterWords.length;
+      delay = 500;
+    }
+
+    setTimeout(type, delay);
+  }
+
+  if (typewriterEl) {
+    setTimeout(type, 1500);
+  }
+
   // ===== Count-up Animation for Hero Stats =====
   function animateStats() {
     const stats = [
