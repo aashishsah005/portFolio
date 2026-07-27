@@ -357,69 +357,86 @@
   /* --- Scroll Reveal Variants --- */
   .reveal {
     opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform, filter;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
   }
-  .reveal:not([data-reveal])       { transform: translateY(40px); filter: blur(4px); }
-  .reveal[data-reveal="left"]      { transform: translateX(-60px); filter: blur(4px); }
-  .reveal[data-reveal="right"]     { transform: translateX(60px); filter: blur(4px); }
-  .reveal[data-reveal="scale"]     { transform: scale(0.85); filter: blur(6px); }
-  .reveal[data-reveal="rotate"]    { transform: perspective(800px) rotateY(8deg) translateX(-30px); filter: blur(3px); }
+  .reveal:not([data-reveal])       { transform: translateY(24px); }
+  .reveal[data-reveal="left"]      { transform: translateX(-30px); }
+  .reveal[data-reveal="right"]     { transform: translateX(30px); }
+  .reveal[data-reveal="scale"]     { transform: scale(0.95); }
+  .reveal[data-reveal="rotate"]    { transform: perspective(800px) rotateY(4deg) translateX(-15px); }
   .reveal.show {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
 
   /* --- Stagger children inside reveal containers --- */
   .reveal.stagger-children > * {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(16px);
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .reveal.stagger-children.show > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: none; }
-  .reveal.stagger-children.show > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: none; }
-  .reveal.stagger-children.show > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: none; }
-  .reveal.stagger-children.show > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: none; }
-  .reveal.stagger-children.show > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: none; }
-  .reveal.stagger-children.show > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: none; }
+  .reveal.stagger-children.show > *:nth-child(2) { transition-delay: 60ms; opacity: 1; transform: none; }
+  .reveal.stagger-children.show > *:nth-child(3) { transition-delay: 120ms; opacity: 1; transform: none; }
+  .reveal.stagger-children.show > *:nth-child(4) { transition-delay: 180ms; opacity: 1; transform: none; }
+  .reveal.stagger-children.show > *:nth-child(5) { transition-delay: 240ms; opacity: 1; transform: none; }
+  .reveal.stagger-children.show > *:nth-child(6) { transition-delay: 300ms; opacity: 1; transform: none; }
 
   /* --- Hero Load Animations --- */
   @keyframes heroFadeIn {
-    from { opacity: 0; transform: translateY(30px) scale(0.98); filter: blur(8px); }
-    to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes heroSlideRight {
-    from { opacity: 0; transform: translateX(-40px); filter: blur(6px); }
-    to   { opacity: 1; transform: translateX(0); filter: blur(0); }
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
   }
   @keyframes heroScaleIn {
-    from { opacity: 0; transform: scale(0.8) rotate(-2deg); filter: blur(10px); }
-    to   { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
   }
   @keyframes counterUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
   .animate-fade-in {
-    animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: heroFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
   }
   .animate-slide-right {
-    animation: heroSlideRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: heroSlideRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
   }
   .animate-scale-in {
-    animation: heroScaleIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: heroScaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
   }
   .animate-counter {
-    animation: counterUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: counterUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     opacity: 0;
+  }
+
+  /* --- H2I Talks Shimmer Animation --- */
+  @keyframes shimmer {
+    0%   { filter: hue-rotate(0deg) brightness(1); opacity: 0.85; }
+    50%  { filter: hue-rotate(8deg) brightness(1.15); opacity: 1; }
+    100% { filter: hue-rotate(0deg) brightness(1); opacity: 0.85; }
+  }
+  .animate-shimmer {
+    animation: shimmer 4s ease-in-out infinite;
+  }
+
+  /* --- H2I Talks Brand pulse-glow adapted to Teal --- */
+  @keyframes tealGlow {
+    0%, 100% { box-shadow: 0 0 16px rgba(43,196,181,0.25), 0 0 30px rgba(43,196,181,0.08); }
+    50%      { box-shadow: 0 0 28px rgba(43,196,181,0.45), 0 0 50px rgba(43,196,181,0.18); }
+  }
+  .animate-teal-glow {
+    animation: tealGlow 3s ease-in-out infinite;
   }
 
   /* --- Typewriter cursor blink --- */
@@ -610,7 +627,7 @@
 
 <nav>
   <div class="nav-inner">
-    <a href="#top" class="logo">Aashish<span>.</span></a>
+    <a href="#top" class="logo animate-shimmer">Aashish<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -634,7 +651,7 @@
       <p class="hero-lead animate-fade-in delay-300">I'm Aashish Sah - <span id="typewriter">Full-Stack Developer</span><span class="typewriter-cursor">|</span></p>
       <p class="animate-fade-in delay-400" style="margin-top: 0px;">focused on production-grade architecture: secure auth flows, real-time features, and payment integrations, not tutorial clones.</p>
       <div class="btn-row animate-fade-in delay-500">
-        <button id="heroHireBtn" class="btn btn-primary" style="cursor:pointer;">Hire Me →</button>
+        <button id="heroHireBtn" class="btn btn-primary animate-teal-glow" style="cursor:pointer;">Hire Me →</button>
         <a href="resume.pdf" class="btn btn-ghost" target="_blank" download="Aashish_Sah_Resume.pdf">Download Resume</a>
       </div>
       <div class="stat-row animate-fade-in delay-700">
@@ -815,7 +832,7 @@
     <div class="contact-box reveal" data-reveal="scale">
       <h2>Let's build something together</h2>
       <p>Currently seeking full-stack developer roles, internships, and open-source collaborative projects. Feel free to reach out.</p>
-      <button id="contactEmailBtn" class="btn btn-primary" style="cursor:pointer; margin: 0 auto 30px; display: inline-flex;">Send Email Message</button>
+      <button id="contactEmailBtn" class="btn btn-primary animate-teal-glow" style="cursor:pointer; margin: 0 auto 30px; display: inline-flex;">Send Email Message</button>
       <div class="contact-links">
         <a href="javascript:void(0)" id="contactLinkEmail" class="contact-link"><span class="label">Email</span><span class="val">aashishsah005@gmail.com</span></a>
         <a href="tel:+919608449927" class="contact-link"><span class="label">Phone</span><span class="val">+91-9608449927</span></a>
