@@ -156,9 +156,7 @@
     clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
     background: linear-gradient(150deg, var(--copper), transparent 40%, var(--teal) 100%);
     opacity: 0.55;
-    animation: rotateSlow 22s linear infinite;
   }
-  @keyframes rotateSlow{ from{ transform:rotate(0deg);} to{ transform:rotate(360deg);} }
   .hex-clip{
     position:absolute; inset:0;
     clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
@@ -577,10 +575,7 @@
     border-color: var(--copper) !important;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    .hex-ring{ animation:none; }
-    .reveal{ transition:none; opacity:1; transform:none; }
-  }
+
 
   /* RESPONSIVE */
   @media (max-width: 900px){
@@ -1025,12 +1020,6 @@
       <div class="btn-row animate-fade-in delay-500">
         <button id="heroHireBtn" class="btn btn-primary animate-teal-glow" style="cursor:pointer;">Hire Me →</button>
         <a href="resume.pdf" class="btn btn-ghost" target="_blank" download="Aashish_Sah_Resume.pdf">Download Resume</a>
-      </div>
-      <div class="stat-row animate-fade-in delay-700">
-        <div class="stat animate-counter delay-700"><b>3</b><span>SHIPPED PROJECTS</span></div>
-        <div class="stat animate-counter delay-800"><b>20+</b><span>REST APIs BUILT</span></div>
-        <div class="stat animate-counter delay-800"><b>8.08</b><span>CGPA / 10</span></div>
-      </div>
     </div>
     <div class="photo-wrap animate-scale-in delay-300">
       <div class="hex-outer">
@@ -1048,9 +1037,8 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
-    <div class="pill-badge reveal">ABOUT ME</div>
-    <h2 class="section-title reveal">Building software that solves real-world problems.</h2>
-    <p class="section-sub reveal">I'm a Computer Engineering student passionate about Full Stack Development, AI, scalable backend systems, and creating modern digital experiences.</p>
+    <div class="eyebrow reveal" data-reveal="left">About Me</div>
+    <h2 class="section-title reveal" style="margin-bottom: 40px;">Building software that solves real-world problems.</h2>
     
     <div class="about-grid-new">
       <div class="about-text-new reveal">
@@ -1195,7 +1183,7 @@
 <!-- JOURNEY -->
 <section id="journey">
   <div class="wrap">
-    <div class="pill-badge reveal">JOURNEY</div>
+    <div class="eyebrow reveal" data-reveal="left">Journey</div>
     <h2 class="section-title reveal">My Learning Journey</h2>
     <p class="section-sub reveal">Building strong foundations in computer engineering while developing production-ready full-stack and AI applications.</p>
     
@@ -1255,12 +1243,12 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
-    <div class="pill-badge reveal">CONTACT</div>
+    <div class="eyebrow reveal" data-reveal="left">Contact</div>
+    <h2 class="section-title reveal">Let's Build Something Amazing Together</h2>
+    <p class="section-sub reveal">Whether it's a Full Stack application, an AI-powered product, or an exciting internship opportunity, I'm always open to working on meaningful projects.</p>
     
     <div class="contact-grid-new">
       <div class="contact-info-new reveal">
-        <h2 class="section-title">Let's Build Something Amazing Together</h2>
-        <p class="section-sub" style="margin-bottom: 32px;">Whether it's a Full Stack application, an AI-powered product, or an exciting internship opportunity, I'm always open to working on meaningful projects.</p>
         
         <div class="info-details-new">
           <div class="info-item-new">
@@ -1360,7 +1348,7 @@
         io.unobserve(e.target); 
       }
     });
-  }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+  }, { threshold: 0.01, rootMargin: "0px 0px -20px 0px" });
   revealEls.forEach(el=>io.observe(el));
 
   // mobile menu (simple toggle -> smooth scroll fallback, links still work via anchor)
@@ -1595,10 +1583,7 @@
       { element: document.getElementById('aboutStatCGPA'), target: 8.08, decimals: 2, suffix: '' },
       { element: document.getElementById('aboutStatProjects'), target: 3, decimals: 0, suffix: '+' },
       { element: document.getElementById('aboutStatAPIs'), target: 20, decimals: 0, suffix: '+' },
-      { element: document.getElementById('aboutStatGrad'), target: 2027, decimals: 0, suffix: '' },
-      { element: document.querySelector('.stat-row .stat:nth-child(1) b'), target: 3, decimals: 0, suffix: '' },
-      { element: document.querySelector('.stat-row .stat:nth-child(2) b'), target: 20, decimals: 0, suffix: '+' },
-      { element: document.querySelector('.stat-row .stat:nth-child(3) b'), target: 8.08, decimals: 2, suffix: '' }
+      { element: document.getElementById('aboutStatGrad'), target: 2027, decimals: 0, suffix: '' }
     ];
 
     stats.forEach(stat => {
