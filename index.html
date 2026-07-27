@@ -19,6 +19,8 @@
     --copper-dim: rgba(227,160,8,0.14);
     --teal: #2BC4B5;
     --teal-dim: rgba(43,196,181,0.14);
+    --purple: #7C6CE0;
+    --purple-dim: rgba(124,108,224,0.14);
     --radius: 3px;
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
@@ -76,7 +78,7 @@
   h1,h2,h3{ font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:-0.01em; }
   .section-title{ font-size: clamp(28px, 4vw, 40px); margin-bottom: 14px; }
   .section-sub{ color: var(--muted); max-width: 560px; font-size: 15.5px; margin-bottom: 32px; }
-  section{ padding: 60px 0; position: relative; }
+  section{ padding: 60px 0; position: relative; scroll-margin-top: 80px; }
   .divider{ height:1px; background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent); }
 
   /* NAV */
@@ -612,9 +614,391 @@
     .contact-links{ grid-template-columns: 1fr; }
     .nav-cta{ display:none; }
   }
+
+  /* --- pill category badge --- */
+  .pill-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: rgba(43, 196, 181, 0.08);
+    border: 1px solid rgba(43, 196, 181, 0.18);
+    padding: 6px 14px;
+    border-radius: 99px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  /* --- Preloader Loading Screen --- */
+  .preloader {
+    position: fixed;
+    inset: 0;
+    background: #0A0D12;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  .preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .preloader-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    background: linear-gradient(90deg, #7C6CE0, #2BC4B5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .preloader-bar {
+    width: 140px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .preloader-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7C6CE0, #2BC4B5);
+    border-radius: 2px;
+  }
+
+  /* --- Project Image Overlay on Hover --- */
+  .proj-thumb {
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 13, 18, 0.72);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+  .proj-card:hover .proj-overlay {
+    opacity: 1;
+  }
+  .proj-overlay .btn {
+    padding: 8px 18px;
+    font-size: 13px;
+    border-radius: 99px;
+  }
+
+  /* --- About Me Redesign --- */
+  .about-grid-new {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .about-text-new h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .about-text-new p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .about-actions-new {
+    display: flex;
+    gap: 16px;
+  }
+  .about-stats-new {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .stat-card-new {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .stat-card-new:hover {
+    border-color: rgba(43, 196, 181, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(43, 196, 181, 0.06);
+  }
+  .stat-num-new {
+    font-size: 36px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    background: linear-gradient(135deg, #7C6CE0, #2BC4B5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+  .stat-label-new {
+    color: var(--muted);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  @media (max-width: 900px) {
+    .about-grid-new {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  /* --- Timeline System --- */
+  .timeline-container {
+    position: relative;
+    margin-top: 40px;
+    padding-left: 32px;
+  }
+  .timeline-line {
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, #7C6CE0, #2BC4B5);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: -31px;
+    top: 10px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #7C6CE0;
+    box-shadow: 0 0 0 4px rgba(124, 108, 224, 0.2);
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .timeline-item:nth-child(even) .timeline-dot {
+    background: var(--teal);
+    box-shadow: 0 0 0 4px rgba(43, 196, 181, 0.2);
+  }
+  .timeline-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .timeline-card:hover {
+    border-color: rgba(124, 108, 224, 0.25);
+    box-shadow: 0 12px 35px rgba(124, 108, 224, 0.04);
+  }
+  .timeline-item:nth-child(even) .timeline-card:hover {
+    border-color: rgba(43, 196, 181, 0.25);
+    box-shadow: 0 12px 35px rgba(43, 196, 181, 0.04);
+  }
+  .timeline-date {
+    background: rgba(124, 108, 224, 0.12);
+    border: 1px solid rgba(124, 108, 224, 0.25);
+    color: #7C6CE0;
+    padding: 4px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .timeline-item:nth-child(even) .timeline-date {
+    background: rgba(43, 196, 181, 0.12);
+    border: 1px solid rgba(43, 196, 181, 0.25);
+    color: var(--teal);
+  }
+  .timeline-title {
+    font-size: 18px;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .timeline-org {
+    color: var(--teal);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .timeline-item:nth-child(even) .timeline-org {
+    color: #7C6CE0;
+  }
+  .timeline-desc {
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  /* --- Contact Section Redesign --- */
+  .contact-grid-new {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: flex-start;
+  }
+  .contact-info-new {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-details-new {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .info-item-new {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .info-icon-new {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--teal);
+  }
+  .info-content-new {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-label-new {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .info-val-new {
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .info-val-new a:hover {
+    color: var(--teal);
+  }
+  
+  .social-links-row-new {
+    display: flex;
+    gap: 24px;
+  }
+  .social-link-item-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .social-icon-box-new {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .social-link-item-new:hover .social-icon-box-new {
+    color: var(--teal);
+    border-color: rgba(43, 196, 181, 0.25);
+    transform: translateY(-2px);
+  }
+  .social-label-new {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  .contact-form-card-new {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 32px;
+    backdrop-filter: blur(14px);
+  }
+  .form-group-new {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .form-group-new label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .form-group-new input, .form-group-new textarea {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group-new input:focus, .form-group-new textarea:focus {
+    border-color: var(--teal);
+  }
+  
+  @media (max-width: 900px) {
+    .contact-grid-new {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
 </style>
 </head>
 <body>
+
+<div class="preloader" id="preloader">
+  <div class="preloader-content">
+    <div class="preloader-text">AASHISH</div>
+    <div class="preloader-bar">
+      <div class="preloader-progress" id="preloaderProgress"></div>
+    </div>
+  </div>
+</div>
 
 <div class="cursor-glow" id="cursorGlow"></div>
 <div class="bg-layer">
@@ -632,7 +1016,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#journey">Journey</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="resume.pdf" class="nav-cta" target="_blank" download="Aashish_Sah_Resume.pdf">Download Resume</a>
@@ -676,21 +1060,36 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
-    <div class="eyebrow">Profile</div>
-    <div class="about-grid">
-      <div class="reveal">
-        <p class="about-lead">Computer Engineering student who treats side projects like production systems — not portfolio filler.</p>
-        <p class="about-body">Focused on the MERN stack with a growing interest in AI-integrated tools. I build with real-world constraints in mind: free-tier infrastructure, actual authentication flows, and live payment gateways — the parts most student projects skip.</p>
-        <div class="info-list">
-          <div class="info-row"><span>Location</span><span>Mehsana, Gujarat, India</span></div>
-          <div class="info-row"><span>Education</span><span>B.E. Computer Engineering, Ganpat University</span></div>
-          <div class="info-row"><span>Graduation</span><span>2027 (CGPA 8.08/10)</span></div>
-          <div class="info-row"><span>Status</span><span>Open to full-stack developer roles</span></div>
+    <div class="pill-badge reveal">ABOUT ME</div>
+    <h2 class="section-title reveal">Building software that solves real-world problems.</h2>
+    <p class="section-sub reveal">I'm a Computer Engineering student passionate about Full Stack Development, AI, scalable backend systems, and creating modern digital experiences.</p>
+    
+    <div class="about-grid-new">
+      <div class="about-text-new reveal">
+        <h3>Who Am I?</h3>
+        <p>I'm Aashish Sah, a passionate Computer Engineering student who enjoys designing scalable web applications, AI-powered software, REST APIs, and modern user experiences. My interests include Full Stack Development, Artificial Intelligence, Backend Engineering, System Design, and Cloud Technologies.</p>
+        <div class="about-actions-new">
+          <a href="#projects" class="btn btn-primary" style="cursor: pointer;">View Projects</a>
+          <a href="resume.pdf" class="btn btn-ghost" target="_blank" download="Aashish_Sah_Resume.pdf">Download CV</a>
         </div>
       </div>
-      <div class="reveal">
-        <div class="quote-block">
-          "Focuses on building production-style projects rather than basic clones, with a strong emphasis on clean architecture, security, and payment integrations."
+      
+      <div class="about-stats-new reveal">
+        <div class="stat-card-new">
+          <div class="stat-num-new" id="aboutStatCGPA">0.00</div>
+          <div class="stat-label-new">Current CGPA</div>
+        </div>
+        <div class="stat-card-new">
+          <div class="stat-num-new" id="aboutStatProjects">0</div>
+          <div class="stat-label-new">Major Projects</div>
+        </div>
+        <div class="stat-card-new">
+          <div class="stat-num-new" id="aboutStatAPIs">0</div>
+          <div class="stat-label-new">REST APIs Built</div>
+        </div>
+        <div class="stat-card-new">
+          <div class="stat-num-new" id="aboutStatGrad">0</div>
+          <div class="stat-label-new">Graduation</div>
         </div>
       </div>
     </div>
@@ -743,6 +1142,10 @@
         <div class="proj-thumb" style="background:linear-gradient(160deg,#132621,#0c1512)">
           <span class="thumb-tag">~/betterhealth_api</span>
           <img src="betterhealth.png" alt="BetterHealth Screenshot">
+          <div class="proj-overlay">
+            <a href="https://betterhealth-frontend.vercel.app/" class="btn btn-primary" target="_blank" onclick="event.stopPropagation()">Live Demo</a>
+            <a href="https://github.com/aashishsah005/BetterHealth" class="btn btn-ghost" target="_blank" onclick="event.stopPropagation()">GitHub</a>
+          </div>
           <div class="thumb-view">View Details →</div>
         </div>
         <div class="proj-info">
@@ -756,6 +1159,10 @@
         <div class="proj-thumb" style="background:linear-gradient(160deg,#241a10,#150f0a)">
           <span class="thumb-tag">~/ecommerce_scraper</span>
           <img src="ecommerce.png" alt="E-Commerce Analyzer Screenshot">
+          <div class="proj-overlay">
+            <a href="https://github.com/aashishsah005/E-Commerce-Product-Analyzer" class="btn btn-primary" target="_blank" onclick="event.stopPropagation()">Live Demo</a>
+            <a href="https://github.com/aashishsah005/E-Commerce-Product-Analyzer" class="btn btn-ghost" target="_blank" onclick="event.stopPropagation()">GitHub</a>
+          </div>
           <div class="thumb-view">View Details →</div>
         </div>
         <div class="proj-info">
@@ -769,6 +1176,10 @@
         <div class="proj-thumb" style="background:linear-gradient(160deg,#1a1626,#100d17)">
           <span class="thumb-tag">~/resume_nlp_parser</span>
           <img src="resumenlp.png" alt="Resume & Gap Mapper Screenshot">
+          <div class="proj-overlay">
+            <a href="https://convergence-giuq.onrender.com/" class="btn btn-primary" target="_blank" onclick="event.stopPropagation()">Live Demo</a>
+            <a href="https://github.com/UjjWal557/Convergence" class="btn btn-ghost" target="_blank" onclick="event.stopPropagation()">GitHub</a>
+          </div>
           <div class="thumb-view">View Details →</div>
         </div>
         <div class="proj-info">
@@ -793,32 +1204,60 @@
 
 <div class="wrap"><div class="divider reveal"></div></div>
 
-<!-- CREDENTIALS -->
-<section id="credentials">
+<!-- JOURNEY -->
+<section id="journey">
   <div class="wrap">
-    <div class="eyebrow reveal" data-reveal="left">Credentials</div>
-    <h2 class="section-title">Education & Certifications</h2>
-    <p class="section-sub reveal">Formal qualifications and verified learning programs.</p>
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <h3>Bachelor of Engineering, Computer Engineering</h3>
-        <div class="school">Ganpat University, Mehsana, Gujarat</div>
-        <div class="edu-meta"><span>2023 — 2027 (Expected)</span><span>CGPA 8.08/10 (6th Sem)</span></div>
-      </div>
-      <div class="edu-card reveal">
-        <div class="cert-item">
-          <div class="cert-icon">GL</div>
-          <div><h4>C for Beginners</h4><span>Great Learning Academy</span></div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-icon">TA</div>
-          <div><h4>GenAI Powered Data Analytics Job Simulation</h4><span>TATA (via Forage)</span></div>
-        </div>
-        <div class="cert-item">
-          <div class="cert-icon">MI</div>
-          <div><h4>Resume Analyzer & Gap Mapper — Participant</h4><span>Project Make-in-India</span></div>
+    <div class="pill-badge reveal">JOURNEY</div>
+    <h2 class="section-title reveal">My Learning Journey</h2>
+    <p class="section-sub reveal">Building strong foundations in computer engineering while developing production-ready full-stack and AI applications.</p>
+    
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      
+      <!-- Timeline Item 1 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-date">2023 - 2027</div>
+          <h3 class="timeline-title">Bachelor of Engineering – Computer Engineering</h3>
+          <div class="timeline-org">Ganpat University</div>
+          <p class="timeline-desc">Pursuing Computer Engineering with a strong focus on Full Stack Development, Artificial Intelligence, Backend Systems, Data Structures & Algorithms, and Cloud Technologies.</p>
         </div>
       </div>
+      
+      <!-- Timeline Item 2 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-date">2024</div>
+          <h3 class="timeline-title">Resume Analyzer & Gap Mapper — Participant</h3>
+          <div class="timeline-org">Project Make-in-India</div>
+          <p class="timeline-desc">Collaborated on designing and developing convergence-style recruitment screening tools using FastAPI, NLP models, and Streamlit interfaces.</p>
+        </div>
+      </div>
+      
+      <!-- Timeline Item 3 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-date">2024</div>
+          <h3 class="timeline-title">GenAI Powered Data Analytics Job Simulation</h3>
+          <div class="timeline-org">TATA (via Forage)</div>
+          <p class="timeline-desc">Completed simulated assignments focused on generative AI workflows, predictive analytics modeling, and executive dashboard design.</p>
+        </div>
+      </div>
+      
+      <!-- Timeline Item 4 -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-date">2023</div>
+          <h3 class="timeline-title">C for Beginners</h3>
+          <div class="timeline-org">Great Learning Academy</div>
+          <p class="timeline-desc">Completed fundamental courses in logical programming structures, memory pointer operations, and structured algorithm design.</p>
+        </div>
+      </div>
+      
     </div>
   </div>
 </section>
@@ -828,56 +1267,100 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
-    <div class="eyebrow reveal" data-reveal="left">Communication</div>
-    <div class="contact-box reveal" data-reveal="scale">
-      <h2>Let's build something together</h2>
-      <p>Currently seeking full-stack developer roles, internships, and open-source collaborative projects. Feel free to reach out.</p>
-      <button id="contactEmailBtn" class="btn btn-primary animate-teal-glow" style="cursor:pointer; margin: 0 auto 30px; display: inline-flex;">Send Email Message</button>
-      <div class="contact-links">
-        <a href="javascript:void(0)" id="contactLinkEmail" class="contact-link"><span class="label">Email</span><span class="val">aashishsah005@gmail.com</span></a>
-        <a href="tel:+919608449927" class="contact-link"><span class="label">Phone</span><span class="val">+91-9608449927</span></a>
-        <a href="https://github.com/aashishsah005" target="_blank" rel="noopener" class="contact-link"><span class="label">GitHub</span><span class="val">github.com/aashishsah005</span></a>
-        <a href="https://linkedin.com/in/aashishsah005" target="_blank" rel="noopener" class="contact-link"><span class="label">LinkedIn</span><span class="val">linkedin.com/in/aashishsah005</span></a>
+    <div class="pill-badge reveal">CONTACT</div>
+    
+    <div class="contact-grid-new">
+      <div class="contact-info-new reveal">
+        <h2 class="section-title">Let's Build Something Amazing Together</h2>
+        <p class="section-sub" style="margin-bottom: 32px;">Whether it's a Full Stack application, an AI-powered product, or an exciting internship opportunity, I'm always open to working on meaningful projects.</p>
+        
+        <div class="info-details-new">
+          <div class="info-item-new">
+            <div class="info-icon-new">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="info-content-new">
+              <span class="info-label-new">Email</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <a href="mailto:aashishsah005@gmail.com" class="info-val-new">aashishsah005@gmail.com</a>
+                <button id="copyEmailBtnInline" style="background: none; border: none; padding: 2px; color: var(--muted); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color 0.2s;" title="Copy email address">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="info-item-new">
+            <div class="info-icon-new">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="info-content-new">
+              <span class="info-label-new">Phone</span>
+              <a href="tel:+919608449927" class="info-val-new">+91-9608449927</a>
+            </div>
+          </div>
+          
+          <div class="info-item-new">
+            <div class="info-icon-new">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="info-content-new">
+              <span class="info-label-new">Location</span>
+              <span class="info-val-new">Gujarat, India</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="social-links-row-new">
+          <a href="https://github.com/aashishsah005" target="_blank" rel="noopener" class="social-link-item-new">
+            <div class="social-icon-box-new">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <span class="social-label-new">GitHub</span>
+          </a>
+          
+          <a href="https://linkedin.com/in/aashishsah005" target="_blank" rel="noopener" class="social-link-item-new">
+            <div class="social-icon-box-new">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/></svg>
+            </div>
+            <span class="social-label-new">LinkedIn</span>
+          </a>
+          
+          <a href="mailto:aashishsah005@gmail.com" class="social-link-item-new">
+            <div class="social-icon-box-new">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <span class="social-label-new">Email</span>
+          </a>
+        </div>
+      </div>
+      
+      <div class="contact-form-card-new reveal">
+        <form id="contactFormInline" onsubmit="event.preventDefault();">
+          <div class="form-group-new">
+            <label for="contactNameInline">Your Name</label>
+            <input type="text" id="contactNameInline" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group-new">
+            <label for="contactEmailInline">Your Email</label>
+            <input type="email" id="contactEmailInline" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group-new">
+            <label for="contactSubjectInline">Subject</label>
+            <input type="text" id="contactSubjectInline" placeholder="Enter subject" required>
+          </div>
+          <div class="form-group-new">
+            <label for="contactMessageInline">Your Message</label>
+            <textarea id="contactMessageInline" rows="5" placeholder="Type your message..." required></textarea>
+          </div>
+          <button type="submit" id="contactSubmitBtnInline" class="btn btn-primary animate-teal-glow" style="width: 100%; justify-content: center; cursor: pointer;">Send Message</button>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
 <footer>© 2026 Aashish Sah — Built with intent, not templates.</footer>
-
-<!-- HIRE ME / CONTACT MODAL -->
-<div class="modal-overlay" id="hireModalOverlay">
-  <div class="modal-box" style="max-width: 500px;">
-    <button class="modal-close" id="hireModalClose">✕</button>
-    <div class="modal-inner">
-      <div class="modal-eyebrow">Contact</div>
-      <h3>Send a message to Aashish</h3>
-      <p class="modal-desc" style="margin-bottom: 20px;">Use this quick form to draft an email directly, or copy the address to clipboard.</p>
-      
-      <!-- Direct Email Copy Action -->
-      <div style="background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-        <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--teal);">aashishsah005@gmail.com</span>
-        <button id="copyEmailBtn" class="btn btn-ghost" style="padding: 6px 12px; font-size: 12px; border-radius: var(--radius); cursor: pointer; transition: all 0.2s; border-color: var(--line);">Copy Address</button>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 14px; text-align: left;">
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase;">Your Name</label>
-          <input type="text" id="hireName" placeholder="Enter your name" style="background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;">
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase;">Subject</label>
-          <input type="text" id="hireSubject" placeholder="Enter subject" style="background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; transition: border-color 0.2s;">
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-transform: uppercase;">Message</label>
-          <textarea id="hireMessage" rows="4" placeholder="Type your message..." style="background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 14px; color: var(--text); font-family: inherit; font-size: 14px; outline: none; resize: none; transition: border-color 0.2s;"></textarea>
-        </div>
-        <button id="hireSubmitBtn" class="btn btn-primary" style="justify-content: center; width: 100%; font-size: 14px; padding: 12px; cursor: pointer; margin-top: 6px;">Open Mail Client</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script>
   // scroll reveal
@@ -1006,59 +1489,74 @@
   overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
 
-  // ===== Hire Modal Logic =====
-  const hireOverlay = document.getElementById('hireModalOverlay');
-  const hireClose = document.getElementById('hireModalClose');
-  const heroHireBtn = document.getElementById('heroHireBtn');
-  const contactEmailBtn = document.getElementById('contactEmailBtn');
-  const contactLinkEmail = document.getElementById('contactLinkEmail');
-  const copyEmailBtn = document.getElementById('copyEmailBtn');
-  const hireSubmitBtn = document.getElementById('hireSubmitBtn');
-
-  function openHireModal() {
-    hireOverlay.classList.add('active');
+  // ===== Preloader Logic =====
+  const preloader = document.getElementById('preloader');
+  const progress = document.getElementById('preloaderProgress');
+  if (preloader && progress) {
     document.body.style.overflow = 'hidden';
+    let percent = 0;
+    const interval = setInterval(() => {
+      percent += 2;
+      progress.style.width = percent + '%';
+      if (percent >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          document.body.style.overflow = '';
+        }, 300);
+      }
+    }, 20);
   }
 
-  function closeHireModal() {
-    hireOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  if (heroHireBtn) heroHireBtn.addEventListener('click', openHireModal);
-  if (contactEmailBtn) contactEmailBtn.addEventListener('click', openHireModal);
-  if (contactLinkEmail) contactLinkEmail.addEventListener('click', (e) => { e.preventDefault(); openHireModal(); });
-  if (hireClose) hireClose.addEventListener('click', closeHireModal);
-  hireOverlay.addEventListener('click', (e) => { if (e.target === hireOverlay) closeHireModal(); });
-
-  // Copy Email Address to Clipboard
-  copyEmailBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText('aashishsah005@gmail.com').then(() => {
-      copyEmailBtn.textContent = 'Copied!';
-      copyEmailBtn.style.borderColor = 'var(--teal)';
-      setTimeout(() => {
-        copyEmailBtn.textContent = 'Copy Address';
-        copyEmailBtn.style.borderColor = 'var(--line)';
-      }, 2000);
+  // ===== Hire Action Smooth Scroll =====
+  const heroHireBtn = document.getElementById('heroHireBtn');
+  if (heroHireBtn) {
+    heroHireBtn.addEventListener('click', () => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
     });
-  });
+  }
 
-  // Submit/Open mail client with drafted info
-  hireSubmitBtn.addEventListener('click', () => {
-    const name = document.getElementById('hireName').value.trim();
-    const subject = document.getElementById('hireSubject').value.trim();
-    const message = document.getElementById('hireMessage').value.trim();
-    
-    let emailSubject = subject || 'Project Discussion';
-    let emailBody = `Hi Aashish,\n\n${message}`;
-    if (name) {
-      emailBody += `\n\nBest regards,\n${name}`;
-    }
-    
-    const mailtoUrl = `mailto:aashishsah005@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    window.location.href = mailtoUrl;
-    closeHireModal();
-  });
+  // ===== Copy Email Address (Inline Form) =====
+  const copyEmailBtnInline = document.getElementById('copyEmailBtnInline');
+  if (copyEmailBtnInline) {
+    copyEmailBtnInline.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText('aashishsah005@gmail.com').then(() => {
+        const svg = copyEmailBtnInline.innerHTML;
+        copyEmailBtnInline.innerHTML = '<span style="font-size: 10px; font-family: sans-serif; color: var(--teal); font-weight: bold;">Copied!</span>';
+        setTimeout(() => {
+          copyEmailBtnInline.innerHTML = svg;
+        }, 2000);
+      });
+    });
+  }
+
+  // ===== Inline Contact Form Submission =====
+  const contactFormInline = document.getElementById('contactFormInline');
+  if (contactFormInline) {
+    contactFormInline.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contactNameInline').value.trim();
+      const email = document.getElementById('contactEmailInline').value.trim();
+      const subject = document.getElementById('contactSubjectInline').value.trim();
+      const message = document.getElementById('contactMessageInline').value.trim();
+      
+      const emailSubject = subject || 'Project Discussion';
+      let emailBody = `Hi Aashish,\n\n${message}`;
+      if (name) {
+        emailBody += `\n\nBest regards,\n${name}`;
+      }
+      if (email) {
+        emailBody += `\n(Sender Email: ${email})`;
+      }
+      
+      const mailtoUrl = `mailto:aashishsah005@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      window.location.href = mailtoUrl;
+    });
+  }
 
   
   
@@ -1103,9 +1601,13 @@
     setTimeout(type, 1500);
   }
 
-  // ===== Count-up Animation for Hero Stats =====
+  // ===== Count-up Animation for Stats =====
   function animateStats() {
     const stats = [
+      { element: document.getElementById('aboutStatCGPA'), target: 8.08, decimals: 2, suffix: '' },
+      { element: document.getElementById('aboutStatProjects'), target: 3, decimals: 0, suffix: '+' },
+      { element: document.getElementById('aboutStatAPIs'), target: 20, decimals: 0, suffix: '+' },
+      { element: document.getElementById('aboutStatGrad'), target: 2027, decimals: 0, suffix: '' },
       { element: document.querySelector('.stat-row .stat:nth-child(1) b'), target: 3, decimals: 0, suffix: '' },
       { element: document.querySelector('.stat-row .stat:nth-child(2) b'), target: 20, decimals: 0, suffix: '+' },
       { element: document.querySelector('.stat-row .stat:nth-child(3) b'), target: 8.08, decimals: 2, suffix: '' }
