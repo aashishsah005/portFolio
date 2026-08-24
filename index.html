@@ -497,125 +497,221 @@
       letter-spacing: 0.05em;
     }
 
-    /* SKILLS */
-    .skill-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    /* ═══════════════════════════════════════════
+       ROTATING SKILLS & TECHNOLOGIES MARQUEE
+       ═══════════════════════════════════════════ */
+    .skills-marquee-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 32px;
+      padding: 14px 0;
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     }
 
-    .skill-card {
-      --acc: var(--copper);
-      --acc-dim: var(--copper-dim);
-      background: linear-gradient(160deg, rgba(23, 28, 37, 0.75), rgba(18, 22, 29, 0.55));
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 26px 24px;
+    .skills-marquee-row {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      margin-bottom: 20px;
+      will-change: transform;
+    }
+
+    .skills-marquee-wrapper:hover .skills-marquee-row {
+      animation-play-state: paused;
+    }
+
+    .marquee-left {
+      animation: marqueeScrollLeft 42s linear infinite;
+    }
+
+    .marquee-right {
+      animation: marqueeScrollRight 42s linear infinite;
+    }
+
+    @keyframes marqueeScrollLeft {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    @keyframes marqueeScrollRight {
+      0% {
+        transform: translateX(-50%);
+      }
+      100% {
+        transform: translateX(0);
+      }
+    }
+
+    .tech-pill-card {
+      flex-shrink: 0;
+      width: 215px;
+      height: 140px;
+      background: linear-gradient(160deg, rgba(23, 28, 37, 0.85), rgba(18, 22, 29, 0.65));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       position: relative;
       overflow: hidden;
-      transition: border-color .3s, transform .3s, box-shadow .3s;
+      transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease;
+      cursor: default;
+      user-select: none;
     }
 
-    .skill-card::before {
+    .tech-pill-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--acc), transparent);
+      background: linear-gradient(90deg, transparent, var(--card-glow, var(--teal)), transparent);
       opacity: 0;
-      transition: opacity .3s;
+      transition: opacity 0.3s ease;
     }
 
-    .skill-card::after {
-      content: '';
+    .tech-pill-card .glow-dot {
       position: absolute;
-      width: 180px;
-      height: 180px;
+      top: 14px;
+      right: 14px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: radial-gradient(circle, var(--acc-dim), transparent 70%);
-      top: -90px;
-      right: -90px;
+      background: var(--card-glow, var(--teal));
+      box-shadow: 0 0 10px 2px var(--card-glow, var(--teal));
       opacity: 0;
-      transition: opacity .4s;
-      pointer-events: none;
+      transform: scale(0.5);
+      transition: all 0.3s ease;
     }
 
-    .skill-card:hover {
-      border-color: var(--acc);
+    .tech-pill-card:hover {
+      border-color: var(--card-glow, var(--teal));
       transform: translateY(-5px);
-      box-shadow: 0 24px 44px -20px var(--acc-dim), 0 0 0 1px var(--acc-dim);
+      background: linear-gradient(160deg, rgba(28, 35, 48, 0.95), rgba(20, 26, 36, 0.85));
+      box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.6), 0 0 20px -5px var(--card-dim, rgba(43, 196, 181, 0.2));
     }
 
-    .skill-card:hover::before,
-    .skill-card:hover::after {
+    .tech-pill-card:hover::before,
+    .tech-pill-card:hover .glow-dot {
       opacity: 1;
+      transform: scale(1);
     }
 
-    .skill-card h3 {
-      font-size: 15px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .skill-card h3 .idx {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--acc);
-      font-size: 12px;
-    }
-
-    .skill-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--acc-dim);
+    .tech-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--card-dim, rgba(43, 196, 181, 0.1));
+      border: 1px solid rgba(255, 255, 255, 0.05);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-      transition: transform .3s;
+      transition: transform 0.3s ease;
     }
 
-    .skill-card:hover .skill-icon {
-      transform: scale(1.08) rotate(-4deg);
+    .tech-pill-card:hover .tech-icon-box {
+      transform: scale(1.1) rotate(-3deg);
     }
 
-    .skill-icon svg {
-      width: 19px;
-      height: 19px;
-      stroke: var(--acc);
-      fill: none;
-      stroke-width: 1.8;
+    .tech-icon-box svg {
+      width: 24px;
+      height: 24px;
+      display: block;
     }
 
-    .chip-row {
+    .tech-meta {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      position: relative;
-      z-index: 1;
+      flex-direction: column;
+      gap: 3px;
     }
 
-    .chip {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      padding: 6px 11px;
-      border: 1px solid var(--line);
-      border-radius: 20px;
+    .tech-meta .tech-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .tech-meta .tech-sub {
+      font-size: 11.5px;
       color: var(--muted);
-      transition: color .2s, border-color .2s, background .2s;
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .skill-card:hover .chip {
-      color: var(--text);
-      border-color: rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.03);
+    /* Bottom stats under rotating skills */
+    .skills-summary-stats {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 56px;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .skills-stat-item {
+      text-align: center;
+    }
+
+    .skills-stat-item b {
+      display: block;
+      font-size: 34px;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      background: linear-gradient(135deg, #ffffff 40%, var(--teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .skills-stat-item span {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 768px) {
+      .tech-pill-card {
+        width: 175px;
+        height: 125px;
+        padding: 14px 16px;
+      }
+      .tech-icon-box {
+        width: 38px;
+        height: 38px;
+      }
+      .tech-icon-box svg {
+        width: 20px;
+        height: 20px;
+      }
+      .tech-meta .tech-title {
+        font-size: 13.5px;
+      }
+      .tech-meta .tech-sub {
+        font-size: 10px;
+      }
+      .skills-summary-stats {
+        gap: 28px;
+      }
+      .skills-stat-item b {
+        font-size: 26px;
+      }
     }
 
     /* PROJECTS — clickable preview cards */
@@ -2058,77 +2154,754 @@
       <div class="eyebrow reveal" data-reveal="left">Capabilities</div>
       <h2 class="section-title reveal">Technical Stack</h2>
       <p class="section-sub reveal">Languages, frameworks, and tools used across production-style builds.</p>
-      <div class="skill-grid">
-        <div class="skill-card reveal" data-reveal="scale">
-          <h3>
-            <div class="skill-icon"><svg viewBox="0 0 24 24">
-                <path d="M8 3 4 7v10l4 4M16 3l4 4v10l-4 4M10 21 14 3" stroke-linecap="round" stroke-linejoin="round" />
-              </svg></div>Languages
-          </h3>
-          <div class="chip-row">
-            <span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">C</span><span
-              class="chip">PHP</span>
+      <!-- ROTATING SKILLS MARQUEE -->
+      <div class="skills-marquee-wrapper reveal" data-reveal="scale">
+        <!-- ROW 1 (Scrolls Left) -->
+        <div class="skills-marquee-row marquee-left">
+          <!-- Item 1: React.js -->
+          <div class="tech-pill-card" style="--card-glow: #00D8FF; --card-dim: rgba(0, 216, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00D8FF" stroke-width="1.8">
+                <circle cx="12" cy="12" r="2.5" fill="#00D8FF"/>
+                <ellipse cx="12" cy="12" rx="10" ry="4"/>
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">React.js</div>
+              <div class="tech-sub">UI Component Library</div>
+            </div>
+          </div>
+
+          <!-- Item 2: Node.js -->
+          <div class="tech-pill-card" style="--card-glow: #68A063; --card-dim: rgba(104, 160, 99, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#68A063" stroke-width="1.8">
+                <path d="M12 2l9 5.2v10.4l-9 5.2-9-5.2V7.2z" stroke-linejoin="round"/>
+                <path d="M12 22V12m0 0L3 7.2m9 4.8l9-4.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Node.js</div>
+              <div class="tech-sub">Server-Side Runtime</div>
+            </div>
+          </div>
+
+          <!-- Item 3: MongoDB -->
+          <div class="tech-pill-card" style="--card-glow: #13AA52; --card-dim: rgba(19, 170, 82, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#13AA52" stroke-width="1.8">
+                <path d="M12 2s-6 5.5-6 11.5a6 6 0 0 0 12 0C18 7.5 12 2 12 2z" stroke-linejoin="round"/>
+                <path d="M12 2v20" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">MongoDB</div>
+              <div class="tech-sub">NoSQL Database</div>
+            </div>
+          </div>
+
+          <!-- Item 4: JavaScript -->
+          <div class="tech-pill-card" style="--card-glow: #F7DF1E; --card-dim: rgba(247, 223, 30, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#F7DF1E" fill-opacity="0.15" stroke="#F7DF1E" stroke-width="1.5"/>
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#F7DF1E" text-anchor="middle">JS</text>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">JavaScript</div>
+              <div class="tech-sub">ES6+ Modern Syntax</div>
+            </div>
+          </div>
+
+          <!-- Item 5: TypeScript -->
+          <div class="tech-pill-card" style="--card-glow: #3178C6; --card-dim: rgba(49, 120, 198, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#3178C6" fill-opacity="0.15" stroke="#3178C6" stroke-width="1.5"/>
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#3178C6" text-anchor="middle">TS</text>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">TypeScript</div>
+              <div class="tech-sub">Typed JavaScript</div>
+            </div>
+          </div>
+
+          <!-- Item 6: Express.js -->
+          <div class="tech-pill-card" style="--card-glow: #E8ECF3; --card-dim: rgba(232, 236, 243, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8ECF3" stroke-width="1.8">
+                <path d="M4 12h16M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="5" cy="12" r="1.5" fill="#E8ECF3"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Express.js</div>
+              <div class="tech-sub">Backend Framework</div>
+            </div>
+          </div>
+
+          <!-- Item 7: Docker -->
+          <div class="tech-pill-card" style="--card-glow: #2496ED; --card-dim: rgba(36, 150, 237, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2496ED" stroke-width="1.8">
+                <path d="M22 13.5c-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0"/>
+                <path d="M2 13.5c0 5 4 8 10 8 5.5 0 9-3 9.5-7.5H2z"/>
+                <rect x="6" y="9" width="3" height="3" rx="0.5"/>
+                <rect x="10" y="9" width="3" height="3" rx="0.5"/>
+                <rect x="14" y="9" width="3" height="3" rx="0.5"/>
+                <rect x="10" y="5.5" width="3" height="3" rx="0.5"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Docker</div>
+              <div class="tech-sub">Containerization</div>
+            </div>
+          </div>
+
+          <!-- Item 8: Git & GitHub -->
+          <div class="tech-pill-card" style="--card-glow: #F05032; --card-dim: rgba(240, 80, 50, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F05032" stroke-width="1.8">
+                <circle cx="18" cy="18" r="3"/>
+                <circle cx="6" cy="6" r="3"/>
+                <circle cx="6" cy="18" r="3"/>
+                <path d="M6 9v6M9 6h6a3 3 0 0 1 3 3v6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Git &amp; GitHub</div>
+              <div class="tech-sub">Version Control</div>
+            </div>
+          </div>
+
+          <!-- Item 9: Python -->
+          <div class="tech-pill-card" style="--card-glow: #3776AB; --card-dim: rgba(55, 118, 171, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3776AB" stroke-width="1.8">
+                <path d="M12 2c-3.3 0-5 1.5-5 3.5v2.5h5v1H6C3.5 9 2 10.7 2 14s1.5 5 5 5h1v-2.5c0-2 1.5-3.5 3.5-3.5h5V12h-5V9h5.5c2.5 0 4-1.5 4-4s-1.5-3-5-3H12z" stroke-linejoin="round"/>
+                <circle cx="9" cy="5.5" r="0.8" fill="#3776AB"/>
+                <circle cx="15" cy="18.5" r="0.8" fill="#F7DF1E"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Python</div>
+              <div class="tech-sub">AI &amp; Backend Logic</div>
+            </div>
+          </div>
+
+          <!-- Item 10: Tailwind CSS -->
+          <div class="tech-pill-card" style="--card-glow: #38BDF8; --card-dim: rgba(56, 189, 248, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8">
+                <path d="M6 12c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
+                <path d="M2 17c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Tailwind CSS</div>
+              <div class="tech-sub">Utility-First Styling</div>
+            </div>
+          </div>
+
+          <!-- Item 11: Next.js -->
+          <div class="tech-pill-card" style="--card-glow: #FFFFFF; --card-dim: rgba(255, 255, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M9 16V8l8 9V8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Next.js</div>
+              <div class="tech-sub">Full-Stack React</div>
+            </div>
+          </div>
+
+          <!-- Item 12: C / C++ -->
+          <div class="tech-pill-card" style="--card-glow: #00599C; --card-dim: rgba(0, 89, 156, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00599C" stroke-width="1.8">
+                <path d="M12 3l8 4.6v9.2l-8 4.6-8-4.6V7.6z" stroke-linejoin="round"/>
+                <path d="M14 10a3 3 0 1 0 0 4M17 12h2M18 11v2M20 12h2M21 11v2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">C / C++</div>
+              <div class="tech-sub">Systems &amp; Algorithms</div>
+            </div>
+          </div>
+
+          <!-- DUPLICATE SET 1 FOR SEAMLESS INFINITE LOOP -->
+          <div class="tech-pill-card" style="--card-glow: #00D8FF; --card-dim: rgba(0, 216, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00D8FF" stroke-width="1.8">
+                <circle cx="12" cy="12" r="2.5" fill="#00D8FF"/>
+                <ellipse cx="12" cy="12" rx="10" ry="4"/>
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">React.js</div>
+              <div class="tech-sub">UI Component Library</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #68A063; --card-dim: rgba(104, 160, 99, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#68A063" stroke-width="1.8">
+                <path d="M12 2l9 5.2v10.4l-9 5.2-9-5.2V7.2z" stroke-linejoin="round"/>
+                <path d="M12 22V12m0 0L3 7.2m9 4.8l9-4.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Node.js</div>
+              <div class="tech-sub">Server-Side Runtime</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #13AA52; --card-dim: rgba(19, 170, 82, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#13AA52" stroke-width="1.8">
+                <path d="M12 2s-6 5.5-6 11.5a6 6 0 0 0 12 0C18 7.5 12 2 12 2z" stroke-linejoin="round"/>
+                <path d="M12 2v20" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">MongoDB</div>
+              <div class="tech-sub">NoSQL Database</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #F7DF1E; --card-dim: rgba(247, 223, 30, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#F7DF1E" fill-opacity="0.15" stroke="#F7DF1E" stroke-width="1.5"/>
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#F7DF1E" text-anchor="middle">JS</text>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">JavaScript</div>
+              <div class="tech-sub">ES6+ Modern Syntax</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #3178C6; --card-dim: rgba(49, 120, 198, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#3178C6" fill-opacity="0.15" stroke="#3178C6" stroke-width="1.5"/>
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#3178C6" text-anchor="middle">TS</text>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">TypeScript</div>
+              <div class="tech-sub">Typed JavaScript</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #E8ECF3; --card-dim: rgba(232, 236, 243, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E8ECF3" stroke-width="1.8">
+                <path d="M4 12h16M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="5" cy="12" r="1.5" fill="#E8ECF3"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Express.js</div>
+              <div class="tech-sub">Backend Framework</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #2496ED; --card-dim: rgba(36, 150, 237, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2496ED" stroke-width="1.8">
+                <path d="M22 13.5c-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0"/>
+                <path d="M2 13.5c0 5 4 8 10 8 5.5 0 9-3 9.5-7.5H2z"/>
+                <rect x="6" y="9" width="3" height="3" rx="0.5"/>
+                <rect x="10" y="9" width="3" height="3" rx="0.5"/>
+                <rect x="14" y="9" width="3" height="3" rx="0.5"/>
+                <rect x="10" y="5.5" width="3" height="3" rx="0.5"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Docker</div>
+              <div class="tech-sub">Containerization</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #F05032; --card-dim: rgba(240, 80, 50, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#F05032" stroke-width="1.8">
+                <circle cx="18" cy="18" r="3"/>
+                <circle cx="6" cy="6" r="3"/>
+                <circle cx="6" cy="18" r="3"/>
+                <path d="M6 9v6M9 6h6a3 3 0 0 1 3 3v6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Git &amp; GitHub</div>
+              <div class="tech-sub">Version Control</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #3776AB; --card-dim: rgba(55, 118, 171, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3776AB" stroke-width="1.8">
+                <path d="M12 2c-3.3 0-5 1.5-5 3.5v2.5h5v1H6C3.5 9 2 10.7 2 14s1.5 5 5 5h1v-2.5c0-2 1.5-3.5 3.5-3.5h5V12h-5V9h5.5c2.5 0 4-1.5 4-4s-1.5-3-5-3H12z" stroke-linejoin="round"/>
+                <circle cx="9" cy="5.5" r="0.8" fill="#3776AB"/>
+                <circle cx="15" cy="18.5" r="0.8" fill="#F7DF1E"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Python</div>
+              <div class="tech-sub">AI &amp; Backend Logic</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #38BDF8; --card-dim: rgba(56, 189, 248, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8">
+                <path d="M6 12c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
+                <path d="M2 17c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Tailwind CSS</div>
+              <div class="tech-sub">Utility-First Styling</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #FFFFFF; --card-dim: rgba(255, 255, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M9 16V8l8 9V8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Next.js</div>
+              <div class="tech-sub">Full-Stack React</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #00599C; --card-dim: rgba(0, 89, 156, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00599C" stroke-width="1.8">
+                <path d="M12 3l8 4.6v9.2l-8 4.6-8-4.6V7.6z" stroke-linejoin="round"/>
+                <path d="M14 10a3 3 0 1 0 0 4M17 12h2M18 11v2M20 12h2M21 11v2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">C / C++</div>
+              <div class="tech-sub">Systems &amp; Algorithms</div>
+            </div>
           </div>
         </div>
-        <div class="skill-card reveal" data-reveal="scale">
-          <h3>
-            <div class="skill-icon"><svg viewBox="0 0 24 24">
-                <rect x="3" y="4" width="18" height="13" rx="1" />
-                <path d="M8 21h8M12 17v4" stroke-linecap="round" />
-              </svg></div>Frontend
-          </h3>
-          <div class="chip-row">
-            <span class="chip">React.js</span><span class="chip">HTML5</span><span class="chip">CSS3</span><span
-              class="chip">Tailwind CSS</span>
+
+        <!-- ROW 2 (Scrolls Right) -->
+        <div class="skills-marquee-row marquee-right">
+          <!-- Item 1: React Native -->
+          <div class="tech-pill-card" style="--card-glow: #61DAFB; --card-dim: rgba(97, 218, 251, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1.8">
+                <rect x="6" y="2" width="12" height="20" rx="3"/>
+                <circle cx="12" cy="18" r="1" fill="#61DAFB"/>
+                <path d="M10 5h4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">React Native</div>
+              <div class="tech-sub">Cross-Platform Mobile</div>
+            </div>
+          </div>
+
+          <!-- Item 2: JWT & Bcrypt -->
+          <div class="tech-pill-card" style="--card-glow: #D63AFF; --card-dim: rgba(214, 58, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#D63AFF" stroke-width="1.8">
+                <path d="M12 2l8 4v6c0 5.5-3.8 10-8 11-4.2-1-8-5.5-8-11V6l8-4z" stroke-linejoin="round"/>
+                <circle cx="12" cy="11" r="2"/>
+                <path d="M12 13v3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">JWT &amp; Bcrypt</div>
+              <div class="tech-sub">Auth &amp; Security</div>
+            </div>
+          </div>
+
+          <!-- Item 3: Socket.IO -->
+          <div class="tech-pill-card" style="--card-glow: #2BC4B5; --card-dim: rgba(43, 196, 181, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2BC4B5" stroke-width="1.8">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Socket.IO</div>
+              <div class="tech-sub">Real-Time Events</div>
+            </div>
+          </div>
+
+          <!-- Item 4: WebRTC -->
+          <div class="tech-pill-card" style="--card-glow: #33B5E5; --card-dim: rgba(51, 181, 229, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#33B5E5" stroke-width="1.8">
+                <rect x="3" y="6" width="13" height="12" rx="2"/>
+                <path d="M16 10l5-3v10l-5-3v-4z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">WebRTC</div>
+              <div class="tech-sub">P2P Media Streaming</div>
+            </div>
+          </div>
+
+          <!-- Item 5: Razorpay & Stripe -->
+          <div class="tech-pill-card" style="--card-glow: #635BFF; --card-dim: rgba(99, 91, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#635BFF" stroke-width="1.8">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <path d="M2 10h20M6 15h4"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Razorpay &amp; Stripe</div>
+              <div class="tech-sub">Payment Gateways</div>
+            </div>
+          </div>
+
+          <!-- Item 6: Cloudinary -->
+          <div class="tech-pill-card" style="--card-glow: #3448C5; --card-dim: rgba(52, 72, 197, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3448C5" stroke-width="1.8">
+                <path d="M7 17a4 4 0 0 1-1-7.87A5.5 5.5 0 0 1 16.5 7 4.5 4.5 0 0 1 17.5 16H7z" stroke-linejoin="round"/>
+                <path d="M12 12v5M9.5 14.5L12 12l2.5 2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Cloudinary</div>
+              <div class="tech-sub">Cloud Media Storage</div>
+            </div>
+          </div>
+
+          <!-- Item 7: Postman -->
+          <div class="tech-pill-card" style="--card-glow: #FF6C37; --card-dim: rgba(255, 108, 55, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FF6C37" stroke-width="1.8">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Postman</div>
+              <div class="tech-sub">API Testing &amp; Docs</div>
+            </div>
+          </div>
+
+          <!-- Item 8: DSA -->
+          <div class="tech-pill-card" style="--card-glow: #A855F7; --card-dim: rgba(168, 85, 247, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8">
+                <rect x="4" y="14" width="4" height="6" rx="1"/>
+                <rect x="10" y="8" width="4" height="12" rx="1"/>
+                <rect x="16" y="4" width="4" height="16" rx="1"/>
+                <path d="M4 14l6-6 4 3 6-7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">DSA</div>
+              <div class="tech-sub">Data Structures &amp; Algos</div>
+            </div>
+          </div>
+
+          <!-- Item 9: MySQL -->
+          <div class="tech-pill-card" style="--card-glow: #00758F; --card-dim: rgba(0, 117, 143, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00758F" stroke-width="1.8">
+                <ellipse cx="12" cy="6" rx="8" ry="3"/>
+                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">MySQL</div>
+              <div class="tech-sub">Relational Database</div>
+            </div>
+          </div>
+
+          <!-- Item 10: HTML5 & CSS3 -->
+          <div class="tech-pill-card" style="--card-glow: #E34F26; --card-dim: rgba(227, 79, 38, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E34F26" stroke-width="1.8">
+                <path d="M4 3l2 16 6 2 6-2 2-16H4z" stroke-linejoin="round"/>
+                <path d="M8 8h8M8 12h7l-.5 4-2.5 1-2.5-1-.2-2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">HTML5 &amp; CSS3</div>
+              <div class="tech-sub">Semantic Web Design</div>
+            </div>
+          </div>
+
+          <!-- Item 11: Selenium -->
+          <div class="tech-pill-card" style="--card-glow: #43B02A; --card-dim: rgba(67, 176, 42, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#43B02A" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="3"/>
+                <path d="M7 12h10M12 7v10" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="2" fill="#43B02A"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Selenium</div>
+              <div class="tech-sub">Web Automation</div>
+            </div>
+          </div>
+
+          <!-- Item 12: REST APIs -->
+          <div class="tech-pill-card" style="--card-glow: #E3A008; --card-dim: rgba(227, 160, 8, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E3A008" stroke-width="1.8">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">REST APIs</div>
+              <div class="tech-sub">Backend Architecture</div>
+            </div>
+          </div>
+
+          <!-- DUPLICATE SET 2 FOR SEAMLESS INFINITE LOOP -->
+          <div class="tech-pill-card" style="--card-glow: #61DAFB; --card-dim: rgba(97, 218, 251, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1.8">
+                <rect x="6" y="2" width="12" height="20" rx="3"/>
+                <circle cx="12" cy="18" r="1" fill="#61DAFB"/>
+                <path d="M10 5h4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">React Native</div>
+              <div class="tech-sub">Cross-Platform Mobile</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #D63AFF; --card-dim: rgba(214, 58, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#D63AFF" stroke-width="1.8">
+                <path d="M12 2l8 4v6c0 5.5-3.8 10-8 11-4.2-1-8-5.5-8-11V6l8-4z" stroke-linejoin="round"/>
+                <circle cx="12" cy="11" r="2"/>
+                <path d="M12 13v3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">JWT &amp; Bcrypt</div>
+              <div class="tech-sub">Auth &amp; Security</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #2BC4B5; --card-dim: rgba(43, 196, 181, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2BC4B5" stroke-width="1.8">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Socket.IO</div>
+              <div class="tech-sub">Real-Time Events</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #33B5E5; --card-dim: rgba(51, 181, 229, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#33B5E5" stroke-width="1.8">
+                <rect x="3" y="6" width="13" height="12" rx="2"/>
+                <path d="M16 10l5-3v10l-5-3v-4z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">WebRTC</div>
+              <div class="tech-sub">P2P Media Streaming</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #635BFF; --card-dim: rgba(99, 91, 255, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#635BFF" stroke-width="1.8">
+                <rect x="2" y="5" width="20" height="14" rx="2"/>
+                <path d="M2 10h20M6 15h4"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Razorpay &amp; Stripe</div>
+              <div class="tech-sub">Payment Gateways</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #3448C5; --card-dim: rgba(52, 72, 197, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#3448C5" stroke-width="1.8">
+                <path d="M7 17a4 4 0 0 1-1-7.87A5.5 5.5 0 0 1 16.5 7 4.5 4.5 0 0 1 17.5 16H7z" stroke-linejoin="round"/>
+                <path d="M12 12v5M9.5 14.5L12 12l2.5 2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Cloudinary</div>
+              <div class="tech-sub">Cloud Media Storage</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #FF6C37; --card-dim: rgba(255, 108, 55, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FF6C37" stroke-width="1.8">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Postman</div>
+              <div class="tech-sub">API Testing &amp; Docs</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #A855F7; --card-dim: rgba(168, 85, 247, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8">
+                <rect x="4" y="14" width="4" height="6" rx="1"/>
+                <rect x="10" y="8" width="4" height="12" rx="1"/>
+                <rect x="16" y="4" width="4" height="16" rx="1"/>
+                <path d="M4 14l6-6 4 3 6-7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">DSA</div>
+              <div class="tech-sub">Data Structures &amp; Algos</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #00758F; --card-dim: rgba(0, 117, 143, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#00758F" stroke-width="1.8">
+                <ellipse cx="12" cy="6" rx="8" ry="3"/>
+                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">MySQL</div>
+              <div class="tech-sub">Relational Database</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #E34F26; --card-dim: rgba(227, 79, 38, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E34F26" stroke-width="1.8">
+                <path d="M4 3l2 16 6 2 6-2 2-16H4z" stroke-linejoin="round"/>
+                <path d="M8 8h8M8 12h7l-.5 4-2.5 1-2.5-1-.2-2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">HTML5 &amp; CSS3</div>
+              <div class="tech-sub">Semantic Web Design</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #43B02A; --card-dim: rgba(67, 176, 42, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#43B02A" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="3"/>
+                <path d="M7 12h10M12 7v10" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="2" fill="#43B02A"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">Selenium</div>
+              <div class="tech-sub">Web Automation</div>
+            </div>
+          </div>
+
+          <div class="tech-pill-card" style="--card-glow: #E3A008; --card-dim: rgba(227, 160, 8, 0.14);">
+            <div class="glow-dot"></div>
+            <div class="tech-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#E3A008" stroke-width="1.8">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="tech-meta">
+              <div class="tech-title">REST APIs</div>
+              <div class="tech-sub">Backend Architecture</div>
+            </div>
           </div>
         </div>
-        <div class="skill-card reveal" data-reveal="scale">
-          <h3>
-            <div class="skill-icon"><svg viewBox="0 0 24 24">
-                <rect x="3" y="3" width="18" height="7" rx="1" />
-                <rect x="3" y="14" width="18" height="7" rx="1" />
-                <circle cx="7" cy="6.5" r="0.6" fill="var(--copper)" />
-                <circle cx="7" cy="17.5" r="0.6" fill="var(--copper)" />
-              </svg></div>Backend
-          </h3>
-          <div class="chip-row">
-            <span class="chip">Node.js</span><span class="chip">Express.js</span>
-          </div>
+      </div>
+
+      <!-- Tech Summary Stats -->
+      <div class="skills-summary-stats reveal" data-reveal="scale">
+        <div class="skills-stat-item">
+          <b>20+</b>
+          <span>Technologies</span>
         </div>
-        <div class="skill-card reveal" data-reveal="scale">
-          <h3>
-            <div class="skill-icon"><svg viewBox="0 0 24 24">
-                <ellipse cx="12" cy="6" rx="8" ry="3" />
-                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"
-                  stroke-linecap="round" />
-              </svg></div>Databases
-          </h3>
-          <div class="chip-row">
-            <span class="chip">MongoDB</span><span class="chip">MySQL</span>
-          </div>
+        <div class="skills-stat-item">
+          <b>3+</b>
+          <span>Production Projects</span>
         </div>
-        <div class="skill-card reveal" data-reveal="scale">
-          <h3>
-            <div class="skill-icon"><svg viewBox="0 0 24 24">
-                <rect x="5" y="11" width="14" height="9" rx="1.5" />
-                <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke-linecap="round" />
-              </svg></div>Auth & Security
-          </h3>
-          <div class="chip-row">
-            <span class="chip">JWT</span><span class="chip">Google OAuth</span><span class="chip">OTP 2FA</span>
-          </div>
-        </div>
-        <div class="skill-card reveal" data-reveal="scale">
-          <h3>
-            <div class="skill-icon"><svg viewBox="0 0 24 24">
-                <path d="M7 17a4 4 0 0 1-1-7.87A5.5 5.5 0 0 1 16.5 7 4.5 4.5 0 0 1 17.5 16H7Z"
-                  stroke-linejoin="round" />
-              </svg></div>Cloud & Tools
-          </h3>
-          <div class="chip-row">
-            <span class="chip">Cloudinary</span><span class="chip">Razorpay</span><span class="chip">Vercel</span><span
-              class="chip">Render</span><span class="chip">Git</span>
-          </div>
+        <div class="skills-stat-item">
+          <b>8.08</b>
+          <span>Academic CGPA</span>
         </div>
       </div>
     </div>
