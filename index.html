@@ -78,6 +78,7 @@
       top: -220px;
       left: -160px;
       background: radial-gradient(circle, var(--copper), transparent 70%);
+      animation: driftGlow1 16s ease-in-out infinite alternate;
     }
 
     .glow-2 {
@@ -86,6 +87,7 @@
       top: 20%;
       right: -200px;
       background: radial-gradient(circle, var(--teal), transparent 70%);
+      animation: driftGlow2 20s ease-in-out infinite alternate;
     }
 
     .glow-3 {
@@ -95,6 +97,22 @@
       left: 30%;
       background: radial-gradient(circle, #7C6CE0, transparent 70%);
       opacity: 0.16;
+      animation: driftGlow3 24s ease-in-out infinite alternate;
+    }
+
+    @keyframes driftGlow1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(70px, 90px) scale(1.15); }
+    }
+
+    @keyframes driftGlow2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-80px, 60px) scale(1.12); }
+    }
+
+    @keyframes driftGlow3 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, -50px) scale(1.18); }
     }
 
     .bg-layer .grain {
@@ -131,7 +149,7 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--copper);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 18px;
@@ -139,9 +157,34 @@
 
     .eyebrow::before {
       content: '';
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--copper);
+      box-shadow: 0 0 8px var(--copper);
+      animation: eyebrowBeacon 2s ease-in-out infinite;
+    }
+
+    .eyebrow::after {
+      content: '';
       width: 22px;
       height: 1px;
       background: var(--copper);
+      opacity: 0.7;
+    }
+
+    @keyframes eyebrowBeacon {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.75;
+        box-shadow: 0 0 6px rgba(227, 160, 8, 0.4);
+      }
+      50% {
+        transform: scale(1.35);
+        opacity: 1;
+        box-shadow: 0 0 14px 3px rgba(227, 160, 8, 0.85);
+      }
     }
 
     h1,
@@ -172,7 +215,14 @@
 
     .divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
+      background: linear-gradient(90deg, transparent, var(--line) 20%, rgba(43, 196, 181, 0.4) 50%, var(--line) 80%, transparent);
+      background-size: 200% 100%;
+      animation: dividerShimmer 8s linear infinite;
+    }
+
+    @keyframes dividerShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
 
     /* NAV */
@@ -299,7 +349,17 @@
 
     .hero h1 em {
       font-style: normal;
-      color: var(--copper);
+      background: linear-gradient(120deg, #E3A008 0%, #2BC4B5 50%, #E3A008 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textShimmer 4s linear infinite;
+    }
+
+    @keyframes textShimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .hero p {
@@ -337,7 +397,25 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease, border-color .25s ease, background .25s ease;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .btn:hover::before {
+      left: 120%;
     }
 
     .btn-primary {
@@ -346,8 +424,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px -8px rgba(227, 160, 8, 0.5);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 35px -8px rgba(227, 160, 8, 0.55);
     }
 
     .btn-ghost {
@@ -357,8 +435,10 @@
     }
 
     .btn-ghost:hover {
+      transform: translateY(-3px) scale(1.02);
       border-color: var(--teal);
       background: var(--teal-dim);
+      box-shadow: 0 14px 35px -8px rgba(43, 196, 181, 0.35);
     }
 
     .stat-row {
@@ -388,6 +468,23 @@
       align-items: center;
     }
 
+    .photo-wrap::before {
+      content: '';
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(43, 196, 181, 0.18) 0%, rgba(227, 160, 8, 0.1) 40%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(25px);
+      z-index: -1;
+      animation: photoPulse 4.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes photoPulse {
+      0% { transform: scale(0.92); opacity: 0.5; }
+      100% { transform: scale(1.08); opacity: 0.95; }
+    }
+
     .hex-outer {
       position: relative;
       width: min(360px, 80vw);
@@ -399,7 +496,14 @@
       inset: -14px;
       clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
       background: linear-gradient(150deg, var(--copper), transparent 40%, var(--teal) 100%);
-      opacity: 0.55;
+      opacity: 0.65;
+      filter: drop-shadow(0 0 16px rgba(43, 196, 181, 0.4));
+      animation: hexRingPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes hexRingPulse {
+      0% { filter: drop-shadow(0 0 10px rgba(227, 160, 8, 0.35)); opacity: 0.55; }
+      100% { filter: drop-shadow(0 0 25px rgba(43, 196, 181, 0.6)); opacity: 0.85; }
     }
 
     .hex-clip {
@@ -807,15 +911,32 @@
       border-radius: var(--radius);
       overflow: hidden;
       cursor: pointer;
-      transition: transform .3s, border-color .3s, box-shadow .3s;
+      position: relative;
+      transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), border-color .3s ease, box-shadow .35s ease;
       display: flex;
       flex-direction: column;
     }
 
+    .proj-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(227, 160, 8, 0.12), transparent 75%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .proj-card:hover::after {
+      opacity: 1;
+    }
+
     .proj-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px) scale(1.01);
       border-color: var(--copper);
-      box-shadow: 0 20px 40px -18px rgba(227, 160, 8, 0.35);
+      box-shadow: 0 24px 48px -18px rgba(0, 0, 0, 0.8), 0 0 25px -4px rgba(227, 160, 8, 0.25);
     }
 
     .proj-thumb {
@@ -832,6 +953,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .proj-card:hover .proj-thumb img,
+    .proj-card:hover .proj-thumb svg {
+      transform: scale(1.07);
     }
 
     .proj-thumb .thumb-tag {
@@ -1823,13 +1950,30 @@
       border-radius: 12px;
       padding: 24px;
       text-align: center;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .stat-card-new::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(43, 196, 181, 0.12), transparent 75%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .stat-card-new:hover::after {
+      opacity: 1;
     }
 
     .stat-card-new:hover {
-      border-color: rgba(43, 196, 181, 0.25);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(43, 196, 181, 0.06);
+      border-color: rgba(43, 196, 181, 0.45);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(43, 196, 181, 0.15);
     }
 
     .stat-num-new {
@@ -1905,17 +2049,35 @@
       border-radius: 12px;
       padding: 24px;
       position: relative;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+    }
+
+    .timeline-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 108, 224, 0.12), transparent 75%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .timeline-card:hover::after {
+      opacity: 1;
     }
 
     .timeline-card:hover {
-      border-color: rgba(124, 108, 224, 0.25);
-      box-shadow: 0 12px 35px rgba(124, 108, 224, 0.04);
+      border-color: rgba(124, 108, 224, 0.45);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(124, 108, 224, 0.12);
     }
 
     .timeline-item:nth-child(even) .timeline-card:hover {
-      border-color: rgba(43, 196, 181, 0.25);
-      box-shadow: 0 12px 35px rgba(43, 196, 181, 0.04);
+      border-color: rgba(43, 196, 181, 0.45);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(43, 196, 181, 0.12);
     }
 
     .timeline-date {
@@ -2484,7 +2646,7 @@
               </svg>
             </div>
             <div class="tech-meta">
-              <div class="tech-title">C / C++</div>
+              <div class="tech-title">C</div>
               <div class="tech-sub">Systems &amp; DSA</div>
             </div>
           </div>
@@ -2570,23 +2732,6 @@
             </div>
           </div>
 
-          <div class="tech-pill-card" style="--card-glow: #2496ED; --card-dim: rgba(36, 150, 237, 0.14);">
-            <div class="tech-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2496ED" stroke-width="1.8">
-                <path d="M22 13.5c-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0"/>
-                <path d="M2 13.5c0 5 4 8 10 8 5.5 0 9-3 9.5-7.5H2z"/>
-                <rect x="6" y="9" width="3" height="3" rx="0.5"/>
-                <rect x="10" y="9" width="3" height="3" rx="0.5"/>
-                <rect x="14" y="9" width="3" height="3" rx="0.5"/>
-                <rect x="10" y="5.5" width="3" height="3" rx="0.5"/>
-              </svg>
-            </div>
-            <div class="tech-meta">
-              <div class="tech-title">Docker</div>
-              <div class="tech-sub">Containers</div>
-            </div>
-          </div>
-
           <div class="tech-pill-card" style="--card-glow: #F05032; --card-dim: rgba(240, 80, 50, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#F05032" stroke-width="1.8">
@@ -2650,7 +2795,7 @@
               </svg>
             </div>
             <div class="tech-meta">
-              <div class="tech-title">C / C++</div>
+              <div class="tech-title">C</div>
               <div class="tech-sub">Systems &amp; DSA</div>
             </div>
           </div>
@@ -2658,20 +2803,6 @@
 
         <!-- ROW 2 (Scrolls Right) -->
         <div class="skills-marquee-row marquee-right">
-          <!-- Item 1: React Native -->
-          <div class="tech-pill-card" style="--card-glow: #61DAFB; --card-dim: rgba(97, 218, 251, 0.14);">
-            <div class="tech-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1.8">
-                <rect x="6" y="2" width="12" height="20" rx="3"/>
-                <circle cx="12" cy="18" r="1" fill="#61DAFB"/>
-                <path d="M10 5h4" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="tech-meta">
-              <div class="tech-title">React Native</div>
-              <div class="tech-sub">Cross-Platform App</div>
-            </div>
-          </div>
 
           <!-- Item 2: JWT & Bcrypt -->
           <div class="tech-pill-card" style="--card-glow: #D63AFF; --card-dim: rgba(214, 58, 255, 0.14);">
@@ -2724,7 +2855,7 @@
               </svg>
             </div>
             <div class="tech-meta">
-              <div class="tech-title">Razorpay &amp; Stripe</div>
+              <div class="tech-title">Razorpay</div>
               <div class="tech-sub">Payment Flow</div>
             </div>
           </div>
@@ -2841,8 +2972,8 @@
               </svg>
             </div>
             <div class="tech-meta">
-              <div class="tech-title">React Native</div>
-              <div class="tech-sub">Cross-Platform App</div>
+              <div class="tech-title">React</div>
+              <div class="tech-sub">UI Components</div>
             </div>
           </div>
 
@@ -2893,7 +3024,7 @@
               </svg>
             </div>
             <div class="tech-meta">
-              <div class="tech-title">Razorpay &amp; Stripe</div>
+              <div class="tech-title">Razorpay</div>
               <div class="tech-sub">Payment Flow</div>
             </div>
           </div>
@@ -3570,6 +3701,18 @@
         cursorGlow.style.top = e.clientY + 'px';
       });
     }
+
+    // ===== Interactive Card Mouse Spotlight Glow =====
+    const spotlightCards = document.querySelectorAll('.proj-card, .skill-card, .stat-card-new, .timeline-card, .contact-card, .tech-pill-card, .edu-card');
+    spotlightCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
   </script>
 </body>
 
