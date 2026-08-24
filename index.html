@@ -78,7 +78,6 @@
       top: -220px;
       left: -160px;
       background: radial-gradient(circle, var(--copper), transparent 70%);
-      animation: driftGlow1 16s ease-in-out infinite alternate;
     }
 
     .glow-2 {
@@ -87,7 +86,6 @@
       top: 20%;
       right: -200px;
       background: radial-gradient(circle, var(--teal), transparent 70%);
-      animation: driftGlow2 20s ease-in-out infinite alternate;
     }
 
     .glow-3 {
@@ -97,22 +95,6 @@
       left: 30%;
       background: radial-gradient(circle, #7C6CE0, transparent 70%);
       opacity: 0.16;
-      animation: driftGlow3 24s ease-in-out infinite alternate;
-    }
-
-    @keyframes driftGlow1 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(70px, 90px) scale(1.15); }
-    }
-
-    @keyframes driftGlow2 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-80px, 60px) scale(1.12); }
-    }
-
-    @keyframes driftGlow3 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(60px, -50px) scale(1.18); }
     }
 
     .bg-layer .grain {
@@ -152,32 +134,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
     }
 
     .eyebrow::before {
       content: '';
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
+      width: 22px;
+      height: 1px;
       background: var(--copper);
-      box-shadow: 0 0 8px var(--copper);
-      animation: eyebrowBeacon 2s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-
-    @keyframes eyebrowBeacon {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 0.75;
-        box-shadow: 0 0 6px rgba(227, 160, 8, 0.4);
-      }
-      50% {
-        transform: scale(1.35);
-        opacity: 1;
-        box-shadow: 0 0 14px 3px rgba(227, 160, 8, 0.85);
-      }
     }
 
     h1,
@@ -208,14 +172,7 @@
 
     .divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--line) 20%, rgba(43, 196, 181, 0.4) 50%, var(--line) 80%, transparent);
-      background-size: 200% 100%;
-      animation: dividerShimmer 8s linear infinite;
-    }
-
-    @keyframes dividerShimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+      background: linear-gradient(90deg, transparent, var(--line) 20%, var(--line) 80%, transparent);
     }
 
     /* NAV */
@@ -342,17 +299,7 @@
 
     .hero h1 em {
       font-style: normal;
-      background: linear-gradient(120deg, #E3A008 0%, #2BC4B5 50%, #E3A008 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: textShimmer 4s linear infinite;
-    }
-
-    @keyframes textShimmer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      color: var(--copper);
     }
 
     .hero p {
@@ -390,25 +337,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      position: relative;
-      overflow: hidden;
-      transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .25s ease, border-color .25s ease, background .25s ease;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -120%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
-      transition: left 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-    }
-
-    .btn:hover::before {
-      left: 120%;
+      transition: transform .2s, box-shadow .2s;
     }
 
     .btn-primary {
@@ -417,8 +346,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 14px 35px -8px rgba(227, 160, 8, 0.55);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -8px rgba(227, 160, 8, 0.5);
     }
 
     .btn-ghost {
@@ -428,10 +357,8 @@
     }
 
     .btn-ghost:hover {
-      transform: translateY(-3px) scale(1.02);
       border-color: var(--teal);
       background: var(--teal-dim);
-      box-shadow: 0 14px 35px -8px rgba(43, 196, 181, 0.35);
     }
 
     .stat-row {
@@ -461,23 +388,6 @@
       align-items: center;
     }
 
-    .photo-wrap::before {
-      content: '';
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      background: radial-gradient(circle, rgba(43, 196, 181, 0.18) 0%, rgba(227, 160, 8, 0.1) 40%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(25px);
-      z-index: -1;
-      animation: photoPulse 4.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes photoPulse {
-      0% { transform: scale(0.92); opacity: 0.5; }
-      100% { transform: scale(1.08); opacity: 0.95; }
-    }
-
     .hex-outer {
       position: relative;
       width: min(360px, 80vw);
@@ -489,14 +399,7 @@
       inset: -14px;
       clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
       background: linear-gradient(150deg, var(--copper), transparent 40%, var(--teal) 100%);
-      opacity: 0.65;
-      filter: drop-shadow(0 0 16px rgba(43, 196, 181, 0.4));
-      animation: hexRingPulse 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes hexRingPulse {
-      0% { filter: drop-shadow(0 0 10px rgba(227, 160, 8, 0.35)); opacity: 0.55; }
-      100% { filter: drop-shadow(0 0 25px rgba(43, 196, 181, 0.6)); opacity: 0.85; }
+      opacity: 0.55;
     }
 
     .hex-clip {
@@ -752,6 +655,7 @@
       0% {
         transform: translateX(0);
       }
+
       100% {
         transform: translateX(-50%);
       }
@@ -761,6 +665,7 @@
       0% {
         transform: translateX(-50%);
       }
+
       100% {
         transform: translateX(0);
       }
@@ -869,23 +774,28 @@
       .skill-grid {
         grid-template-columns: 1fr;
       }
+
       .tech-pill-card {
         width: 155px;
         height: 66px;
         padding: 8px 10px;
         gap: 9px;
       }
+
       .tech-icon-box {
         width: 32px;
         height: 32px;
       }
+
       .tech-icon-box svg {
         width: 17px;
         height: 17px;
       }
+
       .tech-meta .tech-title {
         font-size: 12.5px;
       }
+
       .tech-meta .tech-sub {
         font-size: 9.5px;
       }
@@ -904,32 +814,15 @@
       border-radius: var(--radius);
       overflow: hidden;
       cursor: pointer;
-      position: relative;
-      transition: transform .35s cubic-bezier(0.16, 1, 0.3, 1), border-color .3s ease, box-shadow .35s ease;
+      transition: transform .3s, border-color .3s, box-shadow .3s;
       display: flex;
       flex-direction: column;
     }
 
-    .proj-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(227, 160, 8, 0.12), transparent 75%);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .proj-card:hover::after {
-      opacity: 1;
-    }
-
     .proj-card:hover {
-      transform: translateY(-8px) scale(1.01);
+      transform: translateY(-6px);
       border-color: var(--copper);
-      box-shadow: 0 24px 48px -18px rgba(0, 0, 0, 0.8), 0 0 25px -4px rgba(227, 160, 8, 0.25);
+      box-shadow: 0 20px 40px -18px rgba(227, 160, 8, 0.35);
     }
 
     .proj-thumb {
@@ -946,12 +839,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .proj-card:hover .proj-thumb img,
-    .proj-card:hover .proj-thumb svg {
-      transform: scale(1.07);
     }
 
     .proj-thumb .thumb-tag {
@@ -1943,30 +1830,13 @@
       border-radius: 12px;
       padding: 24px;
       text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .stat-card-new::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(43, 196, 181, 0.12), transparent 75%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .stat-card-new:hover::after {
-      opacity: 1;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .stat-card-new:hover {
-      border-color: rgba(43, 196, 181, 0.45);
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(43, 196, 181, 0.15);
+      border-color: rgba(43, 196, 181, 0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(43, 196, 181, 0.06);
     }
 
     .stat-num-new {
@@ -2042,35 +1912,17 @@
       border-radius: 12px;
       padding: 24px;
       position: relative;
-      overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.35s ease;
-    }
-
-    .timeline-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(350px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 108, 224, 0.12), transparent 75%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-    }
-
-    .timeline-card:hover::after {
-      opacity: 1;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
 
     .timeline-card:hover {
-      border-color: rgba(124, 108, 224, 0.45);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(124, 108, 224, 0.12);
+      border-color: rgba(124, 108, 224, 0.25);
+      box-shadow: 0 12px 35px rgba(124, 108, 224, 0.04);
     }
 
     .timeline-item:nth-child(even) .timeline-card:hover {
-      border-color: rgba(43, 196, 181, 0.45);
-      transform: translateY(-5px);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(43, 196, 181, 0.12);
+      border-color: rgba(43, 196, 181, 0.25);
+      box-shadow: 0 12px 35px rgba(43, 196, 181, 0.04);
     }
 
     .timeline-date {
@@ -2471,10 +2323,10 @@
           <div class="tech-pill-card" style="--card-glow: #00D8FF; --card-dim: rgba(0, 216, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#00D8FF" stroke-width="1.8">
-                <circle cx="12" cy="12" r="2.5" fill="#00D8FF"/>
-                <ellipse cx="12" cy="12" rx="10" ry="4"/>
-                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
-                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+                <circle cx="12" cy="12" r="2.5" fill="#00D8FF" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2487,8 +2339,8 @@
           <div class="tech-pill-card" style="--card-glow: #68A063; --card-dim: rgba(104, 160, 99, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#68A063" stroke-width="1.8">
-                <path d="M12 2l9 5.2v10.4l-9 5.2-9-5.2V7.2z" stroke-linejoin="round"/>
-                <path d="M12 22V12m0 0L3 7.2m9 4.8l9-4.8" stroke-linecap="round"/>
+                <path d="M12 2l9 5.2v10.4l-9 5.2-9-5.2V7.2z" stroke-linejoin="round" />
+                <path d="M12 22V12m0 0L3 7.2m9 4.8l9-4.8" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2501,8 +2353,8 @@
           <div class="tech-pill-card" style="--card-glow: #13AA52; --card-dim: rgba(19, 170, 82, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#13AA52" stroke-width="1.8">
-                <path d="M12 2s-6 5.5-6 11.5a6 6 0 0 0 12 0C18 7.5 12 2 12 2z" stroke-linejoin="round"/>
-                <path d="M12 2v20" stroke-linecap="round"/>
+                <path d="M12 2s-6 5.5-6 11.5a6 6 0 0 0 12 0C18 7.5 12 2 12 2z" stroke-linejoin="round" />
+                <path d="M12 2v20" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2515,8 +2367,10 @@
           <div class="tech-pill-card" style="--card-glow: #F7DF1E; --card-dim: rgba(247, 223, 30, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="18" height="18" rx="4" fill="#F7DF1E" fill-opacity="0.15" stroke="#F7DF1E" stroke-width="1.5"/>
-                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#F7DF1E" text-anchor="middle">JS</text>
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#F7DF1E" fill-opacity="0.15" stroke="#F7DF1E"
+                  stroke-width="1.5" />
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold"
+                  fill="#F7DF1E" text-anchor="middle">JS</text>
               </svg>
             </div>
             <div class="tech-meta">
@@ -2529,8 +2383,10 @@
           <div class="tech-pill-card" style="--card-glow: #3178C6; --card-dim: rgba(49, 120, 198, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="18" height="18" rx="4" fill="#3178C6" fill-opacity="0.15" stroke="#3178C6" stroke-width="1.5"/>
-                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#3178C6" text-anchor="middle">TS</text>
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#3178C6" fill-opacity="0.15" stroke="#3178C6"
+                  stroke-width="1.5" />
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold"
+                  fill="#3178C6" text-anchor="middle">TS</text>
               </svg>
             </div>
             <div class="tech-meta">
@@ -2543,8 +2399,8 @@
           <div class="tech-pill-card" style="--card-glow: #E8ECF3; --card-dim: rgba(232, 236, 243, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#E8ECF3" stroke-width="1.8">
-                <path d="M4 12h16M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="5" cy="12" r="1.5" fill="#E8ECF3"/>
+                <path d="M4 12h16M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="5" cy="12" r="1.5" fill="#E8ECF3" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2557,12 +2413,13 @@
           <div class="tech-pill-card" style="--card-glow: #2496ED; --card-dim: rgba(36, 150, 237, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#2496ED" stroke-width="1.8">
-                <path d="M22 13.5c-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0"/>
-                <path d="M2 13.5c0 5 4 8 10 8 5.5 0 9-3 9.5-7.5H2z"/>
-                <rect x="6" y="9" width="3" height="3" rx="0.5"/>
-                <rect x="10" y="9" width="3" height="3" rx="0.5"/>
-                <rect x="14" y="9" width="3" height="3" rx="0.5"/>
-                <rect x="10" y="5.5" width="3" height="3" rx="0.5"/>
+                <path
+                  d="M22 13.5c-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0-.8-.5-1.8-.5-2.6 0-.8.5-1.8.5-2.6 0" />
+                <path d="M2 13.5c0 5 4 8 10 8 5.5 0 9-3 9.5-7.5H2z" />
+                <rect x="6" y="9" width="3" height="3" rx="0.5" />
+                <rect x="10" y="9" width="3" height="3" rx="0.5" />
+                <rect x="14" y="9" width="3" height="3" rx="0.5" />
+                <rect x="10" y="5.5" width="3" height="3" rx="0.5" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2575,10 +2432,10 @@
           <div class="tech-pill-card" style="--card-glow: #F05032; --card-dim: rgba(240, 80, 50, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#F05032" stroke-width="1.8">
-                <circle cx="18" cy="18" r="3"/>
-                <circle cx="6" cy="6" r="3"/>
-                <circle cx="6" cy="18" r="3"/>
-                <path d="M6 9v6M9 6h6a3 3 0 0 1 3 3v6" stroke-linecap="round"/>
+                <circle cx="18" cy="18" r="3" />
+                <circle cx="6" cy="6" r="3" />
+                <circle cx="6" cy="18" r="3" />
+                <path d="M6 9v6M9 6h6a3 3 0 0 1 3 3v6" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2591,9 +2448,11 @@
           <div class="tech-pill-card" style="--card-glow: #3776AB; --card-dim: rgba(55, 118, 171, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#3776AB" stroke-width="1.8">
-                <path d="M12 2c-3.3 0-5 1.5-5 3.5v2.5h5v1H6C3.5 9 2 10.7 2 14s1.5 5 5 5h1v-2.5c0-2 1.5-3.5 3.5-3.5h5V12h-5V9h5.5c2.5 0 4-1.5 4-4s-1.5-3-5-3H12z" stroke-linejoin="round"/>
-                <circle cx="9" cy="5.5" r="0.8" fill="#3776AB"/>
-                <circle cx="15" cy="18.5" r="0.8" fill="#F7DF1E"/>
+                <path
+                  d="M12 2c-3.3 0-5 1.5-5 3.5v2.5h5v1H6C3.5 9 2 10.7 2 14s1.5 5 5 5h1v-2.5c0-2 1.5-3.5 3.5-3.5h5V12h-5V9h5.5c2.5 0 4-1.5 4-4s-1.5-3-5-3H12z"
+                  stroke-linejoin="round" />
+                <circle cx="9" cy="5.5" r="0.8" fill="#3776AB" />
+                <circle cx="15" cy="18.5" r="0.8" fill="#F7DF1E" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2606,8 +2465,12 @@
           <div class="tech-pill-card" style="--card-glow: #38BDF8; --card-dim: rgba(56, 189, 248, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8">
-                <path d="M6 12c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
-                <path d="M2 17c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
+                <path
+                  d="M6 12c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z"
+                  stroke-linecap="round" />
+                <path
+                  d="M2 17c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z"
+                  stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2620,8 +2483,8 @@
           <div class="tech-pill-card" style="--card-glow: #FFFFFF; --card-dim: rgba(255, 255, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M9 16V8l8 9V8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9 16V8l8 9V8" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2634,8 +2497,8 @@
           <div class="tech-pill-card" style="--card-glow: #00599C; --card-dim: rgba(0, 89, 156, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#00599C" stroke-width="1.8">
-                <path d="M12 3l8 4.6v9.2l-8 4.6-8-4.6V7.6z" stroke-linejoin="round"/>
-                <path d="M14 10a3 3 0 1 0 0 4M17 12h2M18 11v2M20 12h2M21 11v2" stroke-linecap="round"/>
+                <path d="M12 3l8 4.6v9.2l-8 4.6-8-4.6V7.6z" stroke-linejoin="round" />
+                <path d="M14 10a3 3 0 1 0 0 4M17 12h2M18 11v2M20 12h2M21 11v2" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2648,10 +2511,10 @@
           <div class="tech-pill-card" style="--card-glow: #00D8FF; --card-dim: rgba(0, 216, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#00D8FF" stroke-width="1.8">
-                <circle cx="12" cy="12" r="2.5" fill="#00D8FF"/>
-                <ellipse cx="12" cy="12" rx="10" ry="4"/>
-                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
-                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+                <circle cx="12" cy="12" r="2.5" fill="#00D8FF" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+                <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2663,8 +2526,8 @@
           <div class="tech-pill-card" style="--card-glow: #68A063; --card-dim: rgba(104, 160, 99, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#68A063" stroke-width="1.8">
-                <path d="M12 2l9 5.2v10.4l-9 5.2-9-5.2V7.2z" stroke-linejoin="round"/>
-                <path d="M12 22V12m0 0L3 7.2m9 4.8l9-4.8" stroke-linecap="round"/>
+                <path d="M12 2l9 5.2v10.4l-9 5.2-9-5.2V7.2z" stroke-linejoin="round" />
+                <path d="M12 22V12m0 0L3 7.2m9 4.8l9-4.8" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2676,8 +2539,8 @@
           <div class="tech-pill-card" style="--card-glow: #13AA52; --card-dim: rgba(19, 170, 82, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#13AA52" stroke-width="1.8">
-                <path d="M12 2s-6 5.5-6 11.5a6 6 0 0 0 12 0C18 7.5 12 2 12 2z" stroke-linejoin="round"/>
-                <path d="M12 2v20" stroke-linecap="round"/>
+                <path d="M12 2s-6 5.5-6 11.5a6 6 0 0 0 12 0C18 7.5 12 2 12 2z" stroke-linejoin="round" />
+                <path d="M12 2v20" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2689,8 +2552,10 @@
           <div class="tech-pill-card" style="--card-glow: #F7DF1E; --card-dim: rgba(247, 223, 30, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="18" height="18" rx="4" fill="#F7DF1E" fill-opacity="0.15" stroke="#F7DF1E" stroke-width="1.5"/>
-                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#F7DF1E" text-anchor="middle">JS</text>
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#F7DF1E" fill-opacity="0.15" stroke="#F7DF1E"
+                  stroke-width="1.5" />
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold"
+                  fill="#F7DF1E" text-anchor="middle">JS</text>
               </svg>
             </div>
             <div class="tech-meta">
@@ -2702,8 +2567,10 @@
           <div class="tech-pill-card" style="--card-glow: #3178C6; --card-dim: rgba(49, 120, 198, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="18" height="18" rx="4" fill="#3178C6" fill-opacity="0.15" stroke="#3178C6" stroke-width="1.5"/>
-                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold" fill="#3178C6" text-anchor="middle">TS</text>
+                <rect x="3" y="3" width="18" height="18" rx="4" fill="#3178C6" fill-opacity="0.15" stroke="#3178C6"
+                  stroke-width="1.5" />
+                <text x="12" y="16" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="bold"
+                  fill="#3178C6" text-anchor="middle">TS</text>
               </svg>
             </div>
             <div class="tech-meta">
@@ -2715,8 +2582,8 @@
           <div class="tech-pill-card" style="--card-glow: #E8ECF3; --card-dim: rgba(232, 236, 243, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#E8ECF3" stroke-width="1.8">
-                <path d="M4 12h16M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="5" cy="12" r="1.5" fill="#E8ECF3"/>
+                <path d="M4 12h16M14 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="5" cy="12" r="1.5" fill="#E8ECF3" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2728,10 +2595,10 @@
           <div class="tech-pill-card" style="--card-glow: #F05032; --card-dim: rgba(240, 80, 50, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#F05032" stroke-width="1.8">
-                <circle cx="18" cy="18" r="3"/>
-                <circle cx="6" cy="6" r="3"/>
-                <circle cx="6" cy="18" r="3"/>
-                <path d="M6 9v6M9 6h6a3 3 0 0 1 3 3v6" stroke-linecap="round"/>
+                <circle cx="18" cy="18" r="3" />
+                <circle cx="6" cy="6" r="3" />
+                <circle cx="6" cy="18" r="3" />
+                <path d="M6 9v6M9 6h6a3 3 0 0 1 3 3v6" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2743,9 +2610,11 @@
           <div class="tech-pill-card" style="--card-glow: #3776AB; --card-dim: rgba(55, 118, 171, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#3776AB" stroke-width="1.8">
-                <path d="M12 2c-3.3 0-5 1.5-5 3.5v2.5h5v1H6C3.5 9 2 10.7 2 14s1.5 5 5 5h1v-2.5c0-2 1.5-3.5 3.5-3.5h5V12h-5V9h5.5c2.5 0 4-1.5 4-4s-1.5-3-5-3H12z" stroke-linejoin="round"/>
-                <circle cx="9" cy="5.5" r="0.8" fill="#3776AB"/>
-                <circle cx="15" cy="18.5" r="0.8" fill="#F7DF1E"/>
+                <path
+                  d="M12 2c-3.3 0-5 1.5-5 3.5v2.5h5v1H6C3.5 9 2 10.7 2 14s1.5 5 5 5h1v-2.5c0-2 1.5-3.5 3.5-3.5h5V12h-5V9h5.5c2.5 0 4-1.5 4-4s-1.5-3-5-3H12z"
+                  stroke-linejoin="round" />
+                <circle cx="9" cy="5.5" r="0.8" fill="#3776AB" />
+                <circle cx="15" cy="18.5" r="0.8" fill="#F7DF1E" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2757,8 +2626,12 @@
           <div class="tech-pill-card" style="--card-glow: #38BDF8; --card-dim: rgba(56, 189, 248, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="1.8">
-                <path d="M6 12c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
-                <path d="M2 17c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z" stroke-linecap="round"/>
+                <path
+                  d="M6 12c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z"
+                  stroke-linecap="round" />
+                <path
+                  d="M2 17c.5-2 2-3.5 4.5-3.5 3.5 0 4 3 6.5 3 1.5 0 2.5-.8 3-2-0.5 2-2 3.5-4.5 3.5-3.5 0-4-3-6.5-3-1.5 0-2.5.8-3 2z"
+                  stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2770,8 +2643,8 @@
           <div class="tech-pill-card" style="--card-glow: #FFFFFF; --card-dim: rgba(255, 255, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M9 16V8l8 9V8" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="9" />
+                <path d="M9 16V8l8 9V8" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2783,8 +2656,8 @@
           <div class="tech-pill-card" style="--card-glow: #00599C; --card-dim: rgba(0, 89, 156, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#00599C" stroke-width="1.8">
-                <path d="M12 3l8 4.6v9.2l-8 4.6-8-4.6V7.6z" stroke-linejoin="round"/>
-                <path d="M14 10a3 3 0 1 0 0 4M17 12h2M18 11v2M20 12h2M21 11v2" stroke-linecap="round"/>
+                <path d="M12 3l8 4.6v9.2l-8 4.6-8-4.6V7.6z" stroke-linejoin="round" />
+                <path d="M14 10a3 3 0 1 0 0 4M17 12h2M18 11v2M20 12h2M21 11v2" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2801,9 +2674,9 @@
           <div class="tech-pill-card" style="--card-glow: #D63AFF; --card-dim: rgba(214, 58, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#D63AFF" stroke-width="1.8">
-                <path d="M12 2l8 4v6c0 5.5-3.8 10-8 11-4.2-1-8-5.5-8-11V6l8-4z" stroke-linejoin="round"/>
-                <circle cx="12" cy="11" r="2"/>
-                <path d="M12 13v3" stroke-linecap="round"/>
+                <path d="M12 2l8 4v6c0 5.5-3.8 10-8 11-4.2-1-8-5.5-8-11V6l8-4z" stroke-linejoin="round" />
+                <circle cx="12" cy="11" r="2" />
+                <path d="M12 13v3" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2816,7 +2689,7 @@
           <div class="tech-pill-card" style="--card-glow: #2BC4B5; --card-dim: rgba(43, 196, 181, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#2BC4B5" stroke-width="1.8">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round"/>
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2829,8 +2702,8 @@
           <div class="tech-pill-card" style="--card-glow: #33B5E5; --card-dim: rgba(51, 181, 229, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#33B5E5" stroke-width="1.8">
-                <rect x="3" y="6" width="13" height="12" rx="2"/>
-                <path d="M16 10l5-3v10l-5-3v-4z" stroke-linejoin="round"/>
+                <rect x="3" y="6" width="13" height="12" rx="2" />
+                <path d="M16 10l5-3v10l-5-3v-4z" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2843,8 +2716,8 @@
           <div class="tech-pill-card" style="--card-glow: #635BFF; --card-dim: rgba(99, 91, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#635BFF" stroke-width="1.8">
-                <rect x="2" y="5" width="20" height="14" rx="2"/>
-                <path d="M2 10h20M6 15h4"/>
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M2 10h20M6 15h4" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2857,8 +2730,9 @@
           <div class="tech-pill-card" style="--card-glow: #3448C5; --card-dim: rgba(52, 72, 197, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#3448C5" stroke-width="1.8">
-                <path d="M7 17a4 4 0 0 1-1-7.87A5.5 5.5 0 0 1 16.5 7 4.5 4.5 0 0 1 17.5 16H7z" stroke-linejoin="round"/>
-                <path d="M12 12v5M9.5 14.5L12 12l2.5 2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 17a4 4 0 0 1-1-7.87A5.5 5.5 0 0 1 16.5 7 4.5 4.5 0 0 1 17.5 16H7z"
+                  stroke-linejoin="round" />
+                <path d="M12 12v5M9.5 14.5L12 12l2.5 2.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2871,7 +2745,7 @@
           <div class="tech-pill-card" style="--card-glow: #FF6C37; --card-dim: rgba(255, 108, 55, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#FF6C37" stroke-width="1.8">
-                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linejoin="round"/>
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2884,10 +2758,10 @@
           <div class="tech-pill-card" style="--card-glow: #A855F7; --card-dim: rgba(168, 85, 247, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8">
-                <rect x="4" y="14" width="4" height="6" rx="1"/>
-                <rect x="10" y="8" width="4" height="12" rx="1"/>
-                <rect x="16" y="4" width="4" height="16" rx="1"/>
-                <path d="M4 14l6-6 4 3 6-7" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="4" y="14" width="4" height="6" rx="1" />
+                <rect x="10" y="8" width="4" height="12" rx="1" />
+                <rect x="16" y="4" width="4" height="16" rx="1" />
+                <path d="M4 14l6-6 4 3 6-7" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2900,8 +2774,9 @@
           <div class="tech-pill-card" style="--card-glow: #00758F; --card-dim: rgba(0, 117, 143, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#00758F" stroke-width="1.8">
-                <ellipse cx="12" cy="6" rx="8" ry="3"/>
-                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" stroke-linecap="round"/>
+                <ellipse cx="12" cy="6" rx="8" ry="3" />
+                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"
+                  stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2914,8 +2789,8 @@
           <div class="tech-pill-card" style="--card-glow: #E34F26; --card-dim: rgba(227, 79, 38, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#E34F26" stroke-width="1.8">
-                <path d="M4 3l2 16 6 2 6-2 2-16H4z" stroke-linejoin="round"/>
-                <path d="M8 8h8M8 12h7l-.5 4-2.5 1-2.5-1-.2-2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 3l2 16 6 2 6-2 2-16H4z" stroke-linejoin="round" />
+                <path d="M8 8h8M8 12h7l-.5 4-2.5 1-2.5-1-.2-2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2928,9 +2803,9 @@
           <div class="tech-pill-card" style="--card-glow: #43B02A; --card-dim: rgba(67, 176, 42, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#43B02A" stroke-width="1.8">
-                <rect x="3" y="3" width="18" height="18" rx="3"/>
-                <path d="M7 12h10M12 7v10" stroke-linecap="round"/>
-                <circle cx="12" cy="12" r="2" fill="#43B02A"/>
+                <rect x="3" y="3" width="18" height="18" rx="3" />
+                <path d="M7 12h10M12 7v10" stroke-linecap="round" />
+                <circle cx="12" cy="12" r="2" fill="#43B02A" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2943,10 +2818,10 @@
           <div class="tech-pill-card" style="--card-glow: #E3A008; --card-dim: rgba(227, 160, 8, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#E3A008" stroke-width="1.8">
-                <circle cx="18" cy="5" r="3"/>
-                <circle cx="6" cy="12" r="3"/>
-                <circle cx="18" cy="19" r="3"/>
-                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke-linecap="round"/>
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2959,9 +2834,9 @@
           <div class="tech-pill-card" style="--card-glow: #61DAFB; --card-dim: rgba(97, 218, 251, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#61DAFB" stroke-width="1.8">
-                <rect x="6" y="2" width="12" height="20" rx="3"/>
-                <circle cx="12" cy="18" r="1" fill="#61DAFB"/>
-                <path d="M10 5h4" stroke-linecap="round"/>
+                <rect x="6" y="2" width="12" height="20" rx="3" />
+                <circle cx="12" cy="18" r="1" fill="#61DAFB" />
+                <path d="M10 5h4" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2973,9 +2848,9 @@
           <div class="tech-pill-card" style="--card-glow: #D63AFF; --card-dim: rgba(214, 58, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#D63AFF" stroke-width="1.8">
-                <path d="M12 2l8 4v6c0 5.5-3.8 10-8 11-4.2-1-8-5.5-8-11V6l8-4z" stroke-linejoin="round"/>
-                <circle cx="12" cy="11" r="2"/>
-                <path d="M12 13v3" stroke-linecap="round"/>
+                <path d="M12 2l8 4v6c0 5.5-3.8 10-8 11-4.2-1-8-5.5-8-11V6l8-4z" stroke-linejoin="round" />
+                <circle cx="12" cy="11" r="2" />
+                <path d="M12 13v3" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2987,7 +2862,7 @@
           <div class="tech-pill-card" style="--card-glow: #2BC4B5; --card-dim: rgba(43, 196, 181, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#2BC4B5" stroke-width="1.8">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round"/>
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -2999,8 +2874,8 @@
           <div class="tech-pill-card" style="--card-glow: #33B5E5; --card-dim: rgba(51, 181, 229, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#33B5E5" stroke-width="1.8">
-                <rect x="3" y="6" width="13" height="12" rx="2"/>
-                <path d="M16 10l5-3v10l-5-3v-4z" stroke-linejoin="round"/>
+                <rect x="3" y="6" width="13" height="12" rx="2" />
+                <path d="M16 10l5-3v10l-5-3v-4z" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3012,8 +2887,8 @@
           <div class="tech-pill-card" style="--card-glow: #635BFF; --card-dim: rgba(99, 91, 255, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#635BFF" stroke-width="1.8">
-                <rect x="2" y="5" width="20" height="14" rx="2"/>
-                <path d="M2 10h20M6 15h4"/>
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M2 10h20M6 15h4" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3025,8 +2900,9 @@
           <div class="tech-pill-card" style="--card-glow: #3448C5; --card-dim: rgba(52, 72, 197, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#3448C5" stroke-width="1.8">
-                <path d="M7 17a4 4 0 0 1-1-7.87A5.5 5.5 0 0 1 16.5 7 4.5 4.5 0 0 1 17.5 16H7z" stroke-linejoin="round"/>
-                <path d="M12 12v5M9.5 14.5L12 12l2.5 2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7 17a4 4 0 0 1-1-7.87A5.5 5.5 0 0 1 16.5 7 4.5 4.5 0 0 1 17.5 16H7z"
+                  stroke-linejoin="round" />
+                <path d="M12 12v5M9.5 14.5L12 12l2.5 2.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3038,7 +2914,7 @@
           <div class="tech-pill-card" style="--card-glow: #FF6C37; --card-dim: rgba(255, 108, 55, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#FF6C37" stroke-width="1.8">
-                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linejoin="round"/>
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3050,10 +2926,10 @@
           <div class="tech-pill-card" style="--card-glow: #A855F7; --card-dim: rgba(168, 85, 247, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#A855F7" stroke-width="1.8">
-                <rect x="4" y="14" width="4" height="6" rx="1"/>
-                <rect x="10" y="8" width="4" height="12" rx="1"/>
-                <rect x="16" y="4" width="4" height="16" rx="1"/>
-                <path d="M4 14l6-6 4 3 6-7" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="4" y="14" width="4" height="6" rx="1" />
+                <rect x="10" y="8" width="4" height="12" rx="1" />
+                <rect x="16" y="4" width="4" height="16" rx="1" />
+                <path d="M4 14l6-6 4 3 6-7" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3065,8 +2941,9 @@
           <div class="tech-pill-card" style="--card-glow: #00758F; --card-dim: rgba(0, 117, 143, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#00758F" stroke-width="1.8">
-                <ellipse cx="12" cy="6" rx="8" ry="3"/>
-                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" stroke-linecap="round"/>
+                <ellipse cx="12" cy="6" rx="8" ry="3" />
+                <path d="M4 6v6c0 1.66 3.58 3 8 3s8-1.34 8-3V6M4 12v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"
+                  stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3078,8 +2955,8 @@
           <div class="tech-pill-card" style="--card-glow: #E34F26; --card-dim: rgba(227, 79, 38, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#E34F26" stroke-width="1.8">
-                <path d="M4 3l2 16 6 2 6-2 2-16H4z" stroke-linejoin="round"/>
-                <path d="M8 8h8M8 12h7l-.5 4-2.5 1-2.5-1-.2-2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M4 3l2 16 6 2 6-2 2-16H4z" stroke-linejoin="round" />
+                <path d="M8 8h8M8 12h7l-.5 4-2.5 1-2.5-1-.2-2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3091,9 +2968,9 @@
           <div class="tech-pill-card" style="--card-glow: #43B02A; --card-dim: rgba(67, 176, 42, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#43B02A" stroke-width="1.8">
-                <rect x="3" y="3" width="18" height="18" rx="3"/>
-                <path d="M7 12h10M12 7v10" stroke-linecap="round"/>
-                <circle cx="12" cy="12" r="2" fill="#43B02A"/>
+                <rect x="3" y="3" width="18" height="18" rx="3" />
+                <path d="M7 12h10M12 7v10" stroke-linecap="round" />
+                <circle cx="12" cy="12" r="2" fill="#43B02A" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3105,10 +2982,10 @@
           <div class="tech-pill-card" style="--card-glow: #E3A008; --card-dim: rgba(227, 160, 8, 0.14);">
             <div class="tech-icon-box">
               <svg viewBox="0 0 24 24" fill="none" stroke="#E3A008" stroke-width="1.8">
-                <circle cx="18" cy="5" r="3"/>
-                <circle cx="6" cy="12" r="3"/>
-                <circle cx="18" cy="19" r="3"/>
-                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke-linecap="round"/>
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98" stroke-linecap="round" />
               </svg>
             </div>
             <div class="tech-meta">
@@ -3694,18 +3571,6 @@
         cursorGlow.style.top = e.clientY + 'px';
       });
     }
-
-    // ===== Interactive Card Mouse Spotlight Glow =====
-    const spotlightCards = document.querySelectorAll('.proj-card, .skill-card, .stat-card-new, .timeline-card, .contact-card, .tech-pill-card, .edu-card');
-    spotlightCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      });
-    });
   </script>
 </body>
 
